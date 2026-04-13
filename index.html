@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro SC — 4 Amigos · Verão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #0B1825;
+    --navy2:   #112233;
+    --card:    #131F2E;
+    --card2:   #1A2B3C;
+    --gold:    #C9922A;
+    --gold2:   #E8B04A;
+    --sand:    #EDE4D0;
+    --sand2:   #D4C9B0;
+    --teal:    #1A8FA8;
+    --teal2:   #22AFCC;
+    --red:     #C0392B;
+    --green:   #1D7A4F;
+    --muted:   #5A7080;
+    --border:  rgba(201,146,42,0.18);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    padding: 70px 24px 56px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content:'';
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,146,42,.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 80%, rgba(26,143,168,.08) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  .hero-eyebrow {
+    font-family:'DM Mono', monospace;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    opacity:.9;
+  }
+  .hero h1 {
+    font-family:'Cormorant Garamond', serif;
+    font-size: clamp(40px, 8vw, 72px);
+    font-weight:600;
+    line-height:1.05;
+    color:var(--sand);
+    margin-bottom:10px;
+  }
+  .hero h1 em { font-style:italic; color:var(--gold2); }
+  .hero-sub {
+    font-size:15px;
+    color:var(--sand2);
+    opacity:.75;
+    max-width:480px;
+    margin:0 auto 36px;
+  }
+  .hero-meta {
+    display:flex;
+    justify-content:center;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .meta-pill {
+    display:flex; align-items:center; gap:8px;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--border);
+    border-radius:99px;
+    padding:8px 18px;
+    font-size:13px;
+    color:var(--sand2);
+  }
+  .meta-pill .icon { font-size:16px; }
+
+  /* ─── ALERTA ORÇAMENTO ─── */
+  .budget-alert {
+    margin:24px auto;
+    max-width:780px;
+    padding:18px 22px;
+    border-radius:12px;
+    border-left:4px solid var(--red);
+    background:rgba(192,57,43,.08);
+    display:flex; align-items:flex-start; gap:14px;
+  }
+  .budget-alert .icon-big { font-size:28px; flex-shrink:0; margin-top:2px; }
+  .budget-alert strong { color:#e08070; }
+  .budget-alert p { font-size:13.5px; color:var(--sand2); margin-top:4px; line-height:1.5; }
+
+  /* ─── RESUMO FINANCEIRO ─── */
+  .finance-grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:14px;
+    max-width:780px;
+    margin:0 auto 40px;
+    padding:0 24px;
+  }
+  .fin-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .fin-card::before {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+    background:var(--gold);
+    opacity:.4;
+  }
+  .fin-card.highlight::before { background:var(--teal); opacity:.7; }
+  .fin-card.warn::before { background:var(--red); opacity:.7; }
+  .fin-label {
+    font-family:'DM Mono', monospace;
+    font-size:10px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--muted); margin-bottom:6px;
+  }
+  .fin-value {
+    font-family:'Cormorant Garamond', serif;
+    font-size:28px; font-weight:600; color:var(--gold2);
+  }
+  .fin-value.teal { color:var(--teal2); }
+  .fin-value.red { color:#e08070; }
+  .fin-desc { font-size:12px; color:var(--muted); margin-top:4px; }
+
+  /* ─── SEÇÃO ─── */
+  .section {
+    max-width:780px;
+    margin:0 auto;
+    padding:0 24px 60px;
+  }
+  .section-title {
+    font-family:'Cormorant Garamond', serif;
+    font-size:13px; font-weight:600;
+    letter-spacing:4px; text-transform:uppercase;
+    color:var(--gold); margin-bottom:20px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-title::after {
+    content:''; flex:1; height:1px; background:var(--border);
+  }
+
+  /* ─── LINHA DE ROTA ─── */
+  .route-bar {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px 22px;
+    margin-bottom:14px;
+    display:flex; align-items:center; gap:12px;
+    font-size:13px;
+  }
+  .route-seg { display:flex; align-items:center; gap:6px; flex:1; }
+  .route-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+  .route-line { flex:1; height:1px; border-top:1px dashed rgba(201,146,42,.3); }
+  .route-km { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); }
+
+  /* ─── ACORDEON DIAS ─── */
+  .days-container { display:flex; flex-direction:column; gap:12px; }
+
+  .day-card {
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    transition:border-color .25s;
+  }
+  .day-card.open { border-color:rgba(201,146,42,.45); }
+
+  .day-header {
+    display:flex; align-items:center; gap:16px;
+    padding:20px 22px;
+    cursor:pointer;
+    user-select:none;
+    transition:background .2s;
+  }
+  .day-header:hover { background:rgba(255,255,255,.025); }
+
+  .day-num {
+    font-family:'Cormorant Garamond', serif;
+    font-size:36px; font-weight:600;
+    line-height:1; color:var(--gold);
+    opacity:.35;
+    width:40px; flex-shrink:0; text-align:center;
+  }
+  .day-card.open .day-num { opacity:.9; }
+
+  .day-info { flex:1; }
+  .day-label {
+    font-family:'DM Mono', monospace;
+    font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
+    color:var(--muted); margin-bottom:3px;
+  }
+  .day-title {
+    font-family:'Cormorant Garamond', serif;
+    font-size:22px; font-weight:600; color:var(--sand);
+    line-height:1.15;
+  }
+  .day-subtitle {
+    font-size:12.5px; color:var(--muted); margin-top:3px;
+  }
+
+  .day-meta {
+    display:flex; flex-direction:column; align-items:flex-end; gap:6px;
+    flex-shrink:0;
+  }
+  .day-budget-pill {
+    font-family:'DM Mono', monospace; font-size:12px;
+    background:rgba(201,146,42,.1);
+    border:1px solid rgba(201,146,42,.3);
+    color:var(--gold2);
+    padding:4px 12px; border-radius:99px;
+  }
+  .day-budget-pill.tight {
+    background:rgba(192,57,43,.1);
+    border-color:rgba(192,57,43,.3);
+    color:#e08070;
+  }
+  .day-budget-pill.free {
+    background:rgba(29,122,79,.1);
+    border-color:rgba(29,122,79,.3);
+    color:#5abf8a;
+  }
+  .chevron {
+    font-size:18px; color:var(--muted);
+    transition:transform .3s; flex-shrink:0;
+  }
+  .day-card.open .chevron { transform:rotate(180deg); color:var(--gold); }
+
+  /* ─── CONTEÚDO DO DIA ─── */
+  .day-body {
+    max-height:0; overflow:hidden;
+    transition:max-height .5s cubic-bezier(.4,0,.2,1);
+  }
+  .day-body-inner {
+    padding:0 22px 26px;
+    border-top:1px solid var(--border);
+  }
+
+  /* sub-seção dentro do dia */
+  .day-section { margin-top:22px; }
+  .day-section-title {
+    font-family:'DM Mono', monospace;
+    font-size:10px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--teal2); margin-bottom:12px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .day-section-title::after {
+    content:''; flex:1; height:1px; background:rgba(34,175,204,.15);
+  }
+
+  /* atividades */
+  .activity-list { display:flex; flex-direction:column; gap:10px; }
+  .activity {
+    display:flex; gap:14px; align-items:flex-start;
+    background:var(--card2);
+    border-radius:10px; padding:12px 14px;
+  }
+  .activity-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
+  .activity-name { font-size:14px; font-weight:500; color:var(--sand); }
+  .activity-desc { font-size:12.5px; color:var(--muted); margin-top:2px; }
+  .activity-cost {
+    margin-left:auto; flex-shrink:0;
+    font-family:'DM Mono', monospace; font-size:12px;
+    color:var(--gold2); white-space:nowrap; align-self:center;
+  }
+  .activity-cost.free { color:#5abf8a; }
+
+  /* refeições */
+  .meal-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media(max-width:500px){ .meal-grid{ grid-template-columns:1fr; } }
+  .meal-card {
+    background:var(--card2); border-radius:10px; padding:12px 14px;
+    border-left:3px solid transparent;
+  }
+  .meal-card.almoco { border-left-color:rgba(201,146,42,.5); }
+  .meal-card.jantar { border-left-color:rgba(26,143,168,.5); }
+  .meal-card.brunch { border-left-color:rgba(90,191,138,.4); }
+  .meal-type {
+    font-family:'DM Mono', monospace; font-size:10px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--muted); margin-bottom:4px;
+  }
+  .meal-name { font-size:14px; font-weight:500; color:var(--sand); }
+  .meal-detail { font-size:12px; color:var(--muted); margin-top:3px; }
+  .meal-cost { font-family:'DM Mono', monospace; font-size:12px; color:var(--gold2); margin-top:6px; }
+
+  /* hospedagem */
+  .hotel-block {
+    background:var(--card2); border-radius:10px; padding:14px 16px;
+    display:flex; gap:14px; align-items:flex-start;
+  }
+  .hotel-icon { font-size:22px; flex-shrink:0; }
+  .hotel-name { font-size:14px; font-weight:500; color:var(--sand); }
+  .hotel-detail { font-size:12.5px; color:var(--muted); margin-top:3px; }
+  .hotel-cost {
+    margin-left:auto; flex-shrink:0;
+    font-family:'DM Mono', monospace; font-size:13px;
+    color:var(--gold2); white-space:nowrap;
+  }
+
+  /* resumo financeiro do dia */
+  .day-budget-table {
+    background:rgba(0,0,0,.2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:4px;
+  }
+  .dbt-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:9px 14px; font-size:13px;
+    border-bottom:1px solid var(--border);
+  }
+  .dbt-row:last-child { border-bottom:none; }
+  .dbt-row.total {
+    background:rgba(201,146,42,.07);
+    font-weight:600;
+  }
+  .dbt-label { color:var(--sand2); }
+  .dbt-value { font-family:'DM Mono', monospace; color:var(--gold2); }
+  .dbt-value.total-v {
+    font-size:15px; color:var(--gold);
+  }
+
+  /* dica tip */
+  .tip-box {
+    background:rgba(26,143,168,.07);
+    border:1px solid rgba(26,143,168,.2);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:13px; color:var(--sand2);
+    display:flex; gap:10px; align-items:flex-start;
+    margin-top:10px;
+  }
+  .tip-icon { font-size:16px; flex-shrink:0; }
+
+  /* alerta dia */
+  .warn-box {
+    background:rgba(192,57,43,.07);
+    border:1px solid rgba(192,57,43,.25);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:13px; color:#e8b0a0;
+    display:flex; gap:10px; align-items:flex-start;
+  }
+
+  /* ─── RODAPÉ ─── */
+  footer {
+    border-top:1px solid var(--border);
+    padding:30px 24px;
+    text-align:center;
+    font-family:'DM Mono', monospace;
+    font-size:11px; letter-spacing:1.5px;
+    color:var(--muted);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:540px){
+    .hero { padding:50px 16px 40px; }
+    .finance-grid { padding:0 16px; }
+    .section { padding:0 16px 50px; }
+    .day-header { padding:16px; gap:12px; }
+    .day-body-inner { padding:0 16px 22px; }
+    .day-num { font-size:28px; width:30px; }
+    .hero-meta { gap:10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Santa Catarina · Verão · 4 Amigos</div>
+  <h1>Rota <em>Sem Clichê</em><br>Pelo Litoral de SC</h1>
+  <p class="hero-sub">Domingo a Sábado · Jaraguá do Sul → Pomerode → São Chico → Praia Brava → Balneário → Floripa</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><span class="icon">🚗</span> Gol 1.6 · 624 km totais</div>
+    <div class="meta-pill"><span class="icon">👥</span> 4 pessoas</div>
+    <div class="meta-pill"><span class="icon">📅</span> 7 dias · 6 noites</div>
+    <div class="meta-pill"><span class="icon">⛽</span> ~48 litros de gasolina</div>
+  </div>
+</div>
+
+<!-- ALERTA ORÇAMENTO -->
+<div style="max-width:780px; margin:28px auto 0; padding:0 24px;">
+  <div class="budget-alert">
+    <div class="icon-big">⚠️</div>
+    <div>
+      <strong>R$ 1.200 é apertado — recomendo R$ 1.400 a R$ 1.500 por pessoa</strong>
+      <p>Fiz as contas: gasolina (R$ 76), hospedagem Airbnb dividida (R$ 360), alimentação mix padaria + restaurante (R$ 525) e as melhores atividades selecionadas (R$ 267) chegam em <strong>~R$ 1.308/pessoa</strong>. Com R$ 1.200 você cobre, mas sem margem — qualquer gasto extra (estacionamento, sorvete, entrada de museu) fura o orçamento. <strong>Solução:</strong> Airbnb com os 4 no mesmo apartamento de 2 quartos (~R$ 220-250/noite total) e café da manhã feito em casa = a rota funciona dentro de R$ 1.200 com disciplina. Mas R$ 1.400 é o número confortável.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RESUMO FINANCEIRO -->
+<div style="max-width:780px; margin:20px auto 0; padding:0 24px 10px;">
+  <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:12px;">
+    Resumo financeiro por pessoa
+    <span style="flex:1; height:1px; background:var(--border); display:block;"></span>
+  </div>
+</div>
+<div class="finance-grid">
+  <div class="fin-card">
+    <div class="fin-label">Gasolina total</div>
+    <div class="fin-value">R$ 76</div>
+    <div class="fin-desc">624 km · 48 L · média R$ 6,30/L</div>
+  </div>
+  <div class="fin-card">
+    <div class="fin-label">Hospedagem</div>
+    <div class="fin-value">R$ 360</div>
+    <div class="fin-desc">6 noites · Airbnb 4 pax · ~R$ 240/noite</div>
+  </div>
+  <div class="fin-card">
+    <div class="fin-label">Alimentação</div>
+    <div class="fin-value">R$ 525</div>
+    <div class="fin-desc">7 dias · ~R$ 75/dia (mix padaria + rest.)</div>
+  </div>
+  <div class="fin-card highlight">
+    <div class="fin-label">Atividades</div>
+    <div class="fin-value teal">R$ 267</div>
+    <div class="fin-desc">Nugali, Unipraias, Campeche, Fortalezas</div>
+  </div>
+  <div class="fin-card">
+    <div class="fin-label">Fundo reserva</div>
+    <div class="fin-value">R$ 80</div>
+    <div class="fin-desc">Estacion., gorjetas, imprevistos</div>
+  </div>
+  <div class="fin-card warn">
+    <div class="fin-label">TOTAL estimado</div>
+    <div class="fin-value red">R$ 1.308</div>
+    <div class="fin-desc">Recomendado trazer R$ 1.400–1.500</div>
+  </div>
+</div>
+
+<!-- DIAS -->
+<div class="section" style="padding-top:10px;">
+  <div class="section-title">Roteiro dia a dia</div>
+
+  <div class="days-container" id="days">
+
+    <!-- ─── DIA 0 — DOMINGO ─── -->
+    <div class="day-card" id="day0">
+      <div class="day-header" onclick="toggle('day0')">
+        <div class="day-num">0</div>
+        <div class="day-info">
+          <div class="day-label">Domingo · Chegada</div>
+          <div class="day-title">Jaraguá do Sul<br><small style="font-size:16px; opacity:.7">+ Pomerode</small></div>
+          <div class="day-subtitle">Amigos chegam de São Paulo · Aterrissagem suave, arquitetura germânica</div>
+        </div>
+        <div class="day-meta">
+          <div class="day-budget-pill">~R$ 165/pessoa</div>
+          <div class="day-label" style="font-size:10px;">35 km · R$ 4/pax</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="day-body" id="day0-body">
+        <div class="day-body-inner">
+
+          <div class="day-section">
+            <div class="day-section-title">☀️ Manhã — Jaraguá do Sul</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">☕</div>
+                <div>
+                  <div class="activity-name">Café Colonial Strudel Haus</div>
+                  <div class="activity-desc">Café colonial farto: strudel recém-assado, salsicha bock, chimias caseiras. Abre domingo 11h30 — perfeito pra quem chega de SP de manhã. Rua Tifa Aurora, Rio Cerro II.</div>
+                </div>
+                <div class="activity-cost">~R$ 45</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🛋️</div>
+                <div>
+                  <div class="activity-name">Quiero Café (alternativa urbana)</div>
+                  <div class="activity-desc">Ambiente descolado, espresso V60, drinks, pratos com salmão. Mais cosmopolita, ideal se o grupo quiser algo mais "atual". Centro.</div>
+                </div>
+                <div class="activity-cost">~R$ 40</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🌅 Tarde — Pomerode (35 km)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🍫</div>
+                <div>
+                  <div class="activity-name">Nugali Chocolates — Tour Bean-to-Bar</div>
+                  <div class="activity-desc">Pioneira do chocolate fino no Brasil. Tour imersivo pelo processo completo de produção, degustações e loja. Um "ah, eu não sabia que chocolate era assim" garantido.</div>
+                </div>
+                <div class="activity-cost">~R$ 35</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🍺</div>
+                <div>
+                  <div class="activity-name">Cervejaria Schornstein</div>
+                  <div class="activity-desc">Fabricada pela Lei de Pureza Alemã (1516). Tour + degustação. Ótimo contraponto cultural com a herança germânica da região.</div>
+                </div>
+                <div class="activity-cost">~R$ 20</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🏘️</div>
+                <div>
+                  <div class="activity-name">Rota do Enxaimel</div>
+                  <div class="activity-desc">Maior acervo de construções enxaimel fora da Alemanha. Passeio a pé gratuito pelas ruas da cidade — foto obrigatória em cada esquina. Inusitado pra quem nunca veio ao sul.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🍻 Noite — Biergarten Pomerânia</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🏡</div>
+                <div>
+                  <div class="activity-name">Biergarten Pomerânia</div>
+                  <div class="activity-desc">Finaliza o dia com chopps gelados em contexto histórico autêntico. Atmosfera de interior serrano, conversa, sem barulho, sem balada — exatamente o vibe de quem não quer agito no primeiro dia.</div>
+                </div>
+                <div class="activity-cost">~R$ 40</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🛏️ Hospedagem</div>
+            <div class="hotel-block">
+              <div class="hotel-icon">🏠</div>
+              <div>
+                <div class="hotel-name">Airbnb / Pousada em Pomerode</div>
+                <div class="hotel-detail">Opção A: pernoitar em Pomerode (repouso tranquilo, cidade silenciosa). Opção B: descer para BC ainda nesta noite se o grupo tiver energia.</div>
+              </div>
+              <div class="hotel-cost">~R$ 55/pax</div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💰 Orçamento do dia</div>
+            <div class="day-budget-table">
+              <div class="dbt-row"><span class="dbt-label">Gasolina (35 km)</span><span class="dbt-value">R$ 4</span></div>
+              <div class="dbt-row"><span class="dbt-label">Café + alimentação</span><span class="dbt-value">R$ 55</span></div>
+              <div class="dbt-row"><span class="dbt-label">Atividades (Nugali + Schornstein + Biergarten)</span><span class="dbt-value">R$ 95</span></div>
+              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 55</span></div>
+              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 209</span></div>
+            </div>
+            <div class="tip-box" style="margin-top:10px;">
+              <span class="tip-icon">💡</span>
+              <span>Se quiser economizar: pule a cervejaria (economiza R$ 20) e substitua o café colonial (R$ 45) por uma padaria simples (~R$ 15). Chega em ~R$ 155/pessoa.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /day0 -->
+
+    <!-- ─── DIA 1 — SEGUNDA ─── -->
+    <div class="day-card" id="day1">
+      <div class="day-header" onclick="toggle('day1')">
+        <div class="day-num">1</div>
+        <div class="day-info">
+          <div class="day-label">Segunda-feira · O Dia Histórico</div>
+          <div class="day-title">São Francisco do Sul</div>
+          <div class="day-subtitle">3ª cidade mais antiga do Brasil · Centro tombado · Prainha + pôr do sol no Iate Clube</div>
+        </div>
+        <div class="day-meta">
+          <div class="day-budget-pill">~R$ 200/pessoa</div>
+          <div class="day-label" style="font-size:10px;">90 km · R$ 11/pax</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="day-body" id="day1-body">
+        <div class="day-body-inner">
+
+          <div class="day-section">
+            <div class="day-section-title">🏛️ Manhã — Centro Histórico (a pé)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">⛪</div>
+                <div>
+                  <div class="activity-name">Igreja Matriz Nossa Senhora da Graça</div>
+                  <div class="activity-desc">Fundação original de 1553. Argamassa colonial feita com óleo de baleia, areia e conchas trituradas. Museu de Arte Sacra interno. Ponto de partida perfeito da rota pedonal.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🏺</div>
+                <div>
+                  <div class="activity-name">Museu Histórico de São Francisco do Sul</div>
+                  <div class="activity-desc">Na antiga Câmara e Cadeia Pública colonial. Documentos, plantas do antigo porto, utensílios do Brasil Colônia e Império. Contexto histórico real, sem enrolação.</div>
+                </div>
+                <div class="activity-cost">~R$ 10</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">⚓</div>
+                <div>
+                  <div class="activity-name">Museu Nacional do Mar</div>
+                  <div class="activity-desc">Um dos maiores acervos navais do país — embarcações tradicionais brasileiras do século XIX. Confirmar abertura antes. O entorno do Mercado Público oferece vista da Baía Babitonga.</div>
+                </div>
+                <div class="activity-cost">~R$ 10</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🍽️ Almoço</div>
+            <div class="meal-grid">
+              <div class="meal-card almoco">
+                <div class="meal-type">Almoço</div>
+                <div class="meal-name">Restaurante Container</div>
+                <div class="meal-detail">Hambúrgueres chapeados e buffet completo. Rústico-industrial dentro do centro histórico colonial. Preço justo, volume farto.</div>
+                <div class="meal-cost">~R$ 40</div>
+              </div>
+              <div class="meal-card almoco">
+                <div class="meal-type">Almoço</div>
+                <div class="meal-name">A Ver Navios Petisqueira</div>
+                <div class="meal-detail">Rodízio de frutos do mar e petiscos catarinenses. X-A Ver Navios com hambúrguer de peixe. Informal, frente para o mar.</div>
+                <div class="meal-cost">~R$ 55</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🏄 Tarde — Prainha da Saudade</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🌊</div>
+                <div>
+                  <div class="activity-name">Praia da Saudade (Prainha)</div>
+                  <div class="activity-desc">700 metros de orla com calçadão vibrante. Epicentro do surf no litoral norte de SC. O contraste com o centro histórico do século XVI — tudo a 10 minutos de carro — é o que torna São Chico única.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🍹</div>
+                <div>
+                  <div class="activity-name">Calle del Mar — Praia Grande</div>
+                  <div class="activity-desc">Street food litorânea de outro nível: Hambúrguer de Siri empanado em panko, Burrito de Peixe, Fish & Chips. Drinks autorais com insumos amazônicos: Pindorama (cachaça amburana + maracujá + aquafaba), Sibauma (rum spiced + aperitivo de caju + mate).</div>
+                </div>
+                <div class="activity-cost">~R$ 55</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🌇 Pôr do Sol — Pier 65 no Iate Clube (Capri)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🛥️</div>
+                <div>
+                  <div class="activity-name">Pier 65 — Iate Clube Praia do Capri</div>
+                  <div class="activity-desc">Alta gastronomia frente à Baía Babitonga. Congrio em Crosta de Pistache com risoto de limão siciliano, Entrecot com Fonduta de Queijos. Drinks refinados, vista panorâmica serena para o mar calmo. Sem pista de dança, sem barulho. <strong>O melhor pôr do sol de São Chico.</strong></div>
+                </div>
+                <div class="activity-cost">~R$ 70</div>
+              </div>
+            </div>
+            <div class="tip-box">
+              <span class="tip-icon">💡</span>
+              <span><strong>Budget tip:</strong> Se o grupo estiver controlando gastos, pule o Pier 65 (economiza R$ 70) e substitua por drinks no próprio Calle del Mar ao entardecer. Você perde o iate clube mas mantém o pôr do sol.</span>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🛏️ Hospedagem</div>
+            <div class="hotel-block">
+              <div class="hotel-icon">🏠</div>
+              <div>
+                <div class="hotel-name">Airbnb em São Francisco do Sul ou descer para BC</div>
+                <div class="hotel-detail">Opção econômica: já ir para BC à noite (poupa uma diária) e chegar descansado para a terça. São Francisco tem opções baratas de pousada.</div>
+              </div>
+              <div class="hotel-cost">~R$ 55/pax</div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💰 Orçamento do dia</div>
+            <div class="day-budget-table">
+              <div class="dbt-row"><span class="dbt-label">Gasolina (90 km)</span><span class="dbt-value">R$ 11</span></div>
+              <div class="dbt-row"><span class="dbt-label">Museus + entrada</span><span class="dbt-value">R$ 20</span></div>
+              <div class="dbt-row"><span class="dbt-label">Almoço (Container ou A Ver Navios)</span><span class="dbt-value">R$ 45</span></div>
+              <div class="dbt-row"><span class="dbt-label">Calle del Mar (lanche + drinks)</span><span class="dbt-value">R$ 55</span></div>
+              <div class="dbt-row"><span class="dbt-label">Pier 65 (opcional, pôr do sol)</span><span class="dbt-value">R$ 70</span></div>
+              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 55</span></div>
+              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA (com Pier 65)</span><span class="dbt-value total-v">≈ R$ 256</span></div>
+              <div class="dbt-row"><span class="dbt-label">TOTAL / PESSOA (sem Pier 65)</span><span class="dbt-value" style="color:#5abf8a;">≈ R$ 186</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /day1 -->
+
+    <!-- ─── DIA 2 — TERÇA ─── -->
+    <div class="day-card" id="day2">
+      <div class="day-header" onclick="toggle('day2')">
+        <div class="day-num">2</div>
+        <div class="day-info">
+          <div class="day-label">Terça-feira · Visual Impact</div>
+          <div class="day-title">Praia Brava + Balneário Camboriú</div>
+          <div class="day-subtitle">Chegada na AMFRI · Unipraias · Uvva Wine Bar · Big Bär Rooftop</div>
+        </div>
+        <div class="day-meta">
+          <div class="day-budget-pill">~R$ 280/pessoa</div>
+          <div class="day-label" style="font-size:10px;">118 km · R$ 14/pax</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="day-body" id="day2-body">
+        <div class="day-body-inner">
+
+          <div class="day-section">
+            <div class="day-section-title">🌊 Tarde — Praia Brava (Itajaí)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🏖️</div>
+                <div>
+                  <div class="activity-name">Hike Brava Beach Club</div>
+                  <div class="activity-desc">Vibe havaiana, pés na areia, música ao vivo com curadoria ambiente. Almoço ou tarde livre na beira-mar mais valorizada da América do Sul. Funciona de quarta a domingo — verificar se terça tem operação plena.</div>
+                </div>
+                <div class="activity-cost">~R$ 55</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🚡 Balneário Camboriú — Unipraias</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🚟</div>
+                <div>
+                  <div class="activity-name">Parque Unipraias — Bondinho Aéreo</div>
+                  <div class="activity-desc">Liga Barra Sul (centro urbano) → Mata Atlântica (240m de altitude, vista 360°) → Laranjeiras (baía de águas calmas). Impacto visual máximo sem esforço físico. O mirante de Mata Atlântica entrega a melhor fotografia da viagem. <strong>Reserve antecipado em temporada.</strong></div>
+                </div>
+                <div class="activity-cost">~R$ 87</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🌲</div>
+                <div>
+                  <div class="activity-name">Deck do Pontal Norte</div>
+                  <div class="activity-desc">Passarela de madeira sinuosa debruçada sobre o oceano com mata nativa. Vista lateral da orla monumental de BC. Completamente gratuito, dura uns 40 minutos. Impactante.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🍷 Noite — Uvva Wine Bar (Praia Brava)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🍷</div>
+                <div>
+                  <div class="activity-name">Uvva Wine Bar</div>
+                  <div class="activity-desc">16 torneiras de vinho em sistema self-service. Arquitetura como obra de arte, petiscos de exceção, altamente instagramável. O espaço prova que dá pra ter uma noite vibrante sem pista de dança. <strong>Rua Delfim Mário de P. Peixoto, 391 · Ter-Sex 18h–00h.</strong></div>
+                </div>
+                <div class="activity-cost">~R$ 80</div>
+              </div>
+            </div>
+            <div class="tip-box">
+              <span class="tip-icon">🍷</span>
+              <span>No Uvva, o self-service de vinho permite controlar exatamente quanto cada um bebe e gasta. É fácil ficar R$ 50 ou R$ 120 — depende da vontade. Considere isso no planejamento.</span>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🛏️ Hospedagem — Base: Praia Brava ou BC</div>
+            <div class="hotel-block">
+              <div class="hotel-icon">🏠</div>
+              <div>
+                <div class="hotel-name">Airbnb 2 quartos — Praia Brava ou BC</div>
+                <div class="hotel-detail">Base para 2 noites (terça e quarta). Praia Brava tem Airbnbs razoáveis. Dividindo 4 pessoas, sai bem. Cozinha para café da manhã = economia real de R$ 15–20 por pessoa por dia.</div>
+              </div>
+              <div class="hotel-cost">~R$ 60/pax</div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💰 Orçamento do dia</div>
+            <div class="day-budget-table">
+              <div class="dbt-row"><span class="dbt-label">Gasolina (118 km)</span><span class="dbt-value">R$ 14</span></div>
+              <div class="dbt-row"><span class="dbt-label">Hike Beach Club (almoço/tarde)</span><span class="dbt-value">R$ 55</span></div>
+              <div class="dbt-row"><span class="dbt-label">Unipraias</span><span class="dbt-value">R$ 87</span></div>
+              <div class="dbt-row"><span class="dbt-label">Uvva Wine Bar</span><span class="dbt-value">R$ 80</span></div>
+              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 60</span></div>
+              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 296</span></div>
+            </div>
+            <div class="warn-box" style="margin-top:10px;">
+              <span>⚠️</span>
+              <span>Este é o dia mais caro da viagem. Se necessário: troque o Hike Beach Club por praia pública livre (~R$ 30 de lanche), economizando R$ 25.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /day2 -->
+
+    <!-- ─── DIA 3 — QUARTA ─── -->
+    <div class="day-card" id="day3">
+      <div class="day-header" onclick="toggle('day3')">
+        <div class="day-num">3</div>
+        <div class="day-info">
+          <div class="day-label">Quarta-feira · Natureza + Rooftop</div>
+          <div class="day-title">BC + Itapema</div>
+          <div class="day-subtitle">Interpraias · Praia do Estaleiro · Alma Gastro · Big Bär ou Tetto Rooftop</div>
+        </div>
+        <div class="day-meta">
+          <div class="day-budget-pill">~R$ 195/pessoa</div>
+          <div class="day-label" style="font-size:10px;">40 km · R$ 5/pax</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="day-body" id="day3-body">
+        <div class="day-body-inner">
+
+          <div class="day-section">
+            <div class="day-section-title">🌿 Manhã — Rodovia Interpraias</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🏞️</div>
+                <div>
+                  <div class="activity-name">Rodovia Interpraias + Praia do Estaleiro</div>
+                  <div class="activity-desc">Corredor ecológico que serpenteia pelos morros ligando Laranjeiras → Taquaras → Estaleiro → Estaleirinho. A Praia do Estaleiro é rústica, com pedras, mata densa e mar bravo — o oposto da Avenida Brasil. Completamente gratuito e o antídoto perfeito para a densidade de BC.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🎡</div>
+                <div>
+                  <div class="activity-name">Big Bär Rooftop (pré-visita / fotos diurnas)</div>
+                  <div class="activity-desc">Ao lado da roda gigante FG Big Wheel na Estrada da Rainha. Espelhos d'água, almofadas, skyline de BC pela metade da tarde. Reservar para a noite.</div>
+                </div>
+                <div class="activity-cost">~R$ 20 (consumação)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🍽️ Almoço — Itapema (15 km de BC)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🌄</div>
+                <div>
+                  <div class="activity-name">Indaiá Restaurante (no alto do morro)</div>
+                  <div class="activity-desc">Arquitetura envidraçada com vista panorâmica da Baía de Porto Belo e da orla de Itapema. Menu degustação e fondue premium. Um almoço com vista dificilmente superável. Se o grupo for selecionar 1 restaurante "especial" fora de Floripa, é este.</div>
+                </div>
+                <div class="activity-cost">~R$ 75</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🌃 Noite — Rooftop em BC</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🏙️</div>
+                <div>
+                  <div class="activity-name">Big Bär Rooftop</div>
+                  <div class="activity-desc">Sofisticado, com espelhos d'água e almofadas. Skyline brutal de BC ao entardecer. Foco em coquetéis criativos e conversa. Menos pomposo que o Tetto, mais intimista. Ideal para grupos pequenos.</div>
+                </div>
+                <div class="activity-cost">~R$ 60</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">✨</div>
+                <div>
+                  <div class="activity-name">Tetto Rooftop (alternativa)</div>
+                  <div class="activity-desc">33º andar, parapeito de vidro infinito, painel LED de 130m². Mais tecnológico e grandioso. Se o grupo quiser a experiência "wow" de altura, é aqui. Funciona de quarta a domingo.</div>
+                </div>
+                <div class="activity-cost">~R$ 60</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🍣</div>
+                <div>
+                  <div class="activity-name">Izakaya Brava</div>
+                  <div class="activity-desc">Bar sensorial japonês à beira-mar. Decoração de vanguarda, culinária oriental de altíssima qualidade, clima para conversa sem abafar. Quarta a sábado, 19h–23h.</div>
+                </div>
+                <div class="activity-cost">~R$ 65</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💰 Orçamento do dia</div>
+            <div class="day-budget-table">
+              <div class="dbt-row"><span class="dbt-label">Gasolina (40 km)</span><span class="dbt-value">R$ 5</span></div>
+              <div class="dbt-row"><span class="dbt-label">Almoço Indaiá</span><span class="dbt-value">R$ 75</span></div>
+              <div class="dbt-row"><span class="dbt-label">Rooftop (Big Bär ou Tetto)</span><span class="dbt-value">R$ 60</span></div>
+              <div class="dbt-row"><span class="dbt-label">Hospedagem (2ª noite no mesmo Airbnb)</span><span class="dbt-value">R$ 60</span></div>
+              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 200</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /day3 -->
+
+    <!-- ─── DIA 4 — QUINTA ─── -->
+    <div class="day-card" id="day4">
+      <div class="day-header" onclick="toggle('day4')">
+        <div class="day-num">4</div>
+        <div class="day-info">
+          <div class="day-label">Quinta-feira · A Ilha da Magia chega</div>
+          <div class="day-title">Florianópolis — Dia Histórico</div>
+          <div class="day-subtitle">Centro · Mercado Público · Fortaleza 1740 · Santo Antônio de Lisboa · Seu Antônio</div>
+        </div>
+        <div class="day-meta">
+          <div class="day-budget-pill">~R$ 220/pessoa</div>
+          <div class="day-label" style="font-size:10px;">80 km · R$ 10/pax</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="day-body" id="day4-body">
+        <div class="day-body-inner">
+
+          <div class="day-section">
+            <div class="day-section-title">🏛️ Manhã — Centro Histórico de Floripa (a pé)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🌳</div>
+                <div>
+                  <div class="activity-name">Praça XV de Novembro — Figueira Centenária (1871)</div>
+                  <div class="activity-desc">Epicentro espiritual da cidade. Tradição ilhoa: dar voltas ao redor da figueira para atrair casamento ou garantir o retorno à ilha. Frente para a Catedral Metropolitana.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🏛️</div>
+                <div>
+                  <div class="activity-name">Palácio Cruz e Sousa</div>
+                  <div class="activity-desc">Construído no século XVIII como sobrado açoriano, reformado em 1877 para palácio neoclássico — hospedou D. Pedro I e D. Pedro II. Assoalhos em marchetaria geométrica, claraboias. Museu Histórico de SC.</div>
+                </div>
+                <div class="activity-cost">~R$ 10</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🛒</div>
+                <div>
+                  <div class="activity-name">Mercado Público Municipal</div>
+                  <div class="activity-desc">120+ anos de funcionamento. Não é peixaria — é onde intelectuais, políticos, turistas e pescadores dividem a mesma mesa nos bares. A alma viva de Floripa. Cobertura nova inspirada em renda de bilro açoriana.</div>
+                </div>
+                <div class="activity-cost free">grátis (comida à parte)</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🌉</div>
+                <div>
+                  <div class="activity-name">Ponte Hercílio Luz (a pé)</div>
+                  <div class="activity-desc">Inaugurada em 1926, restaurada recentemente. 800m de estrutura pênsil com 5.000 toneladas de aço. Cruzar a pé oferece as melhores fotos da viagem — vistas das Baías Norte e Sul simultaneamente.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💡 Almoço no Mercado</div>
+            <div class="meal-grid">
+              <div class="meal-card almoco">
+                <div class="meal-type">Almoço</div>
+                <div class="meal-name">Bars do Mercado Público</div>
+                <div class="meal-detail">Moqueca, caldo de berbigão, prato feito com linguiça. Comer dentro do Mercado é a experiência correta em Floripa — não é turístico, é genuíno.</div>
+                <div class="meal-cost">~R$ 35</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">⚔️ Tarde — Fortaleza de São José da Ponta Grossa</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🏰</div>
+                <div>
+                  <div class="activity-name">Fortaleza de São José da Ponta Grossa (1740)</div>
+                  <div class="activity-desc">Construída por ordem do Brigadeiro José da Silva Paes para defender a Baía Norte de espanhóis e corsários. Baterias de canhões alinhadas para o horizonte. Dramática, intelectualmente pesada, completamente diferente de uma praia. Fica do lado da Praia do Forte (dá pra tomar banho depois).</div>
+                </div>
+                <div class="activity-cost">~R$ 15</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🌅 Pôr do Sol — Santo Antônio de Lisboa</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🦪</div>
+                <div>
+                  <div class="activity-name">Santo Antônio de Lisboa — Vilarejo Açoriano</div>
+                  <div class="activity-desc">Casarios baixos coloridos, ruas de pedra irregular, Igreja Nossa Senhora das Necessidades. Um dos maiores polos de maricultura do Brasil — ostras frescas direto do mar a R$ 15–20 a dúzia nas barraquinhas.</div>
+                </div>
+                <div class="activity-cost">~R$ 20</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">🍽️</div>
+                <div>
+                  <div class="activity-name">Restaurante Seu Antônio</div>
+                  <div class="activity-desc">Orientado para o ocaso da Baía Norte. DJ e banda ao vivo em frequência de lounge — estimula conversa, não ensurdece. Culinária com insumos litorâneos locais e técnicas modernas. <strong>O "lugar pika" de Floripa.</strong> Atrai artistas e formadores de opinião. Reserva necessária.</div>
+                </div>
+                <div class="activity-cost">~R$ 90</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🛏️ Hospedagem — Floripa (2 noites)</div>
+            <div class="hotel-block">
+              <div class="hotel-icon">🏠</div>
+              <div>
+                <div class="hotel-name">Airbnb em Florianópolis — Norte ou Centro</div>
+                <div class="hotel-detail">Base para quinta e sexta. Região da Lagoa da Conceição ou Jurerê Internacional tem boas opções. Norte facilita o acesso à Fortaleza e a Santo Antônio. Dividir 4 pessoas em 2 quartos.</div>
+              </div>
+              <div class="hotel-cost">~R$ 65/pax</div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💰 Orçamento do dia</div>
+            <div class="day-budget-table">
+              <div class="dbt-row"><span class="dbt-label">Gasolina (80 km)</span><span class="dbt-value">R$ 10</span></div>
+              <div class="dbt-row"><span class="dbt-label">Museus / Fortaleza</span><span class="dbt-value">R$ 25</span></div>
+              <div class="dbt-row"><span class="dbt-label">Almoço Mercado</span><span class="dbt-value">R$ 35</span></div>
+              <div class="dbt-row"><span class="dbt-label">Ostras + Seu Antônio (jantar/sunset)</span><span class="dbt-value">R$ 110</span></div>
+              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 65</span></div>
+              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 245</span></div>
+            </div>
+            <div class="tip-box">
+              <span class="tip-icon">💡</span>
+              <span>Se precisar cortar: troque o Seu Antônio (R$ 90) por um jantar simples em padaria (~R$ 25) e vá apenas para as ostras nas barraquinhas. Economiza ~R$ 65.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /day4 -->
+
+    <!-- ─── DIA 5 — SEXTA ─── -->
+    <div class="day-card" id="day5">
+      <div class="day-header" onclick="toggle('day5')">
+        <div class="day-num">5</div>
+        <div class="day-info">
+          <div class="day-label">Sexta-feira · O Grande Fechamento</div>
+          <div class="day-title">Florianópolis — Dia do Mar</div>
+          <div class="day-subtitle">Ilha do Campeche · Lagoinha do Leste (trilha) · Última noite em Floripa</div>
+        </div>
+        <div class="day-meta">
+          <div class="day-budget-pill">~R$ 215/pessoa</div>
+          <div class="day-label" style="font-size:10px;">40 km internos · R$ 5/pax</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="day-body" id="day5-body">
+        <div class="day-body-inner">
+
+          <div class="day-section">
+            <div class="day-section-title">🏝️ Opção A — Ilha do Campeche (reserve com semanas de antecedência)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🐠</div>
+                <div>
+                  <div class="activity-name">Ilha do Campeche — "Caribe Brasileiro"</div>
+                  <div class="activity-desc">IPHAN limita o número diário de visitantes — sensação real de paraíso privado. Maior concentração de inscrições rupestres do litoral sul. Água cristalina com visibilidade de 10 metros. <strong>Embarque em botes rápidos da Armação do Pântano do Sul ou Barra da Lagoa. Reservar com operadoras credenciadas com 2–4 semanas de antecedência no verão.</strong></div>
+                </div>
+                <div class="activity-cost">~R$ 90</div>
+              </div>
+            </div>
+            <div class="warn-box" style="margin-top:8px;">
+              <span>⚠️</span>
+              <span><strong>Atenção:</strong> A Ilha do Campeche só tem 1 restaurante caro e com fila. Levem cooler com água, frutas e lanches. Economiza dinheiro e tempo.</span>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🥾 Opção B — Lagoinha do Leste (se Campeche não rolar)</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">⛰️</div>
+                <div>
+                  <div class="activity-name">Lagoinha do Leste — Trilha pelo Pântano do Sul</div>
+                  <div class="activity-desc">Acessível apenas por trilha íngreme (~45 min subida). Recompensa: lagoa de água doce escura separada por uma faixa de areia do oceano aberto. Morro da Coroa no topo = o mirante mais dramático de Floripa. Completamente gratuito e praticamente deserto fora do pico da temporada.</div>
+                </div>
+                <div class="activity-cost free">grátis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🍽️ Almoço / Tarde</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🥗</div>
+                <div>
+                  <div class="activity-name">Picnic / Cooler na ilha ou trilha</div>
+                  <div class="activity-desc">Comprar no supermercado antes: frutas, pão, frios, suco. Além de ser muito mais barato, evita fila e preserva tempo de praia. Leve snorkel — a experiência de mergulho no Campeche é gratuita após o barco.</div>
+                </div>
+                <div class="activity-cost">~R$ 20</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">🌃 Última noite — Jantar em Floripa</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🦐</div>
+                <div>
+                  <div class="activity-name">Ribeirão da Ilha — Ostras e Mariscos</div>
+                  <div class="activity-desc">Vilarejo pesqueiro no sul da ilha. Um dos mais completos restaurantes de frutos do mar de SC. Custo menor que os lounges do norte. Ideal para um jantar tranquilo de encerramento de viagem.</div>
+                </div>
+                <div class="activity-cost">~R$ 55</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💰 Orçamento do dia</div>
+            <div class="day-budget-table">
+              <div class="dbt-row"><span class="dbt-label">Gasolina (40 km internos)</span><span class="dbt-value">R$ 5</span></div>
+              <div class="dbt-row"><span class="dbt-label">Ilha do Campeche (barco)</span><span class="dbt-value">R$ 90</span></div>
+              <div class="dbt-row"><span class="dbt-label">Picnic / alimentação do dia</span><span class="dbt-value">R$ 20</span></div>
+              <div class="dbt-row"><span class="dbt-label">Jantar Ribeirão da Ilha</span><span class="dbt-value">R$ 55</span></div>
+              <div class="dbt-row"><span class="dbt-label">Hospedagem (2ª noite Floripa)</span><span class="dbt-value">R$ 65</span></div>
+              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA (com Campeche)</span><span class="dbt-value total-v">≈ R$ 235</span></div>
+              <div class="dbt-row"><span class="dbt-label">TOTAL / PESSOA (trilha Lagoinha — sem barco)</span><span class="dbt-value" style="color:#5abf8a;">≈ R$ 145</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /day5 -->
+
+    <!-- ─── DIA 6 — SÁBADO ─── -->
+    <div class="day-card" id="day6">
+      <div class="day-header" onclick="toggle('day6')">
+        <div class="day-num">6</div>
+        <div class="day-info">
+          <div class="day-label">Sábado · Operação Retorno</div>
+          <div class="day-title">Florianópolis → Jaraguá do Sul</div>
+          <div class="day-subtitle">⚠️ Sair ANTES das 06h00 · BR-101 colapsa após 09h em alta temporada</div>
+        </div>
+        <div class="day-meta">
+          <div class="day-budget-pill free">~R$ 55/pessoa</div>
+          <div class="day-label" style="font-size:10px;">181 km · R$ 22/pax</div>
+        </div>
+        <div class="chevron">▼</div>
+      </div>
+      <div class="day-body" id="day6-body">
+        <div class="day-body-inner">
+
+          <div class="day-section">
+            <div class="warn-box">
+              <span>🚨</span>
+              <div>
+                <strong style="color:#e08070;">BR-101 em alta temporada = até 75% mais tráfego</strong><br>
+                <span>O trecho Floripa–BC–Itapema–Jaraguá leva 2h20 normalmente. Em sábado de verão das 9h às 18h, pode chegar a 7–10h de viagem parada. A Operação Verão da PRF reporta gargalos fatais em Itapema (Meia Praia), Camboriú e Itajaí.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">⏰ Plano de saída obrigatório</div>
+            <div class="activity-list">
+              <div class="activity">
+                <div class="activity-icon">🌙</div>
+                <div>
+                  <div class="activity-name">Checkout antes das 05h30 — na BR-101 antes das 06h00</div>
+                  <div class="activity-desc">Com estradas vazias e neblina costeira, você chega em Jaraguá do Sul por volta das 08h–08h30. Sobra manhã inteira para banho, bagagem e confraternização final antes de eles irem ao aeroporto/rodoviária.</div>
+                </div>
+                <div class="activity-cost free">2h20</div>
+              </div>
+              <div class="activity">
+                <div class="activity-icon">☕</div>
+                <div>
+                  <div class="activity-name">Última confraternização em Jaraguá do Sul</div>
+                  <div class="activity-desc">Com a chegada cedo, dá pra fazer um último brunch calmo — Quiero Café ou padaria simples. O encerramento da viagem sem correria e sem stress de trânsito.</div>
+                </div>
+                <div class="activity-cost">~R$ 25</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-section">
+            <div class="day-section-title">💰 Orçamento do dia</div>
+            <div class="day-budget-table">
+              <div class="dbt-row"><span class="dbt-label">Gasolina (181 km)</span><span class="dbt-value">R$ 22</span></div>
+              <div class="dbt-row"><span class="dbt-label">Café da manhã / brunch final</span><span class="dbt-value">R$ 25</span></div>
+              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v" style="color:#5abf8a;">≈ R$ 47</span></div>
+            </div>
+            <div class="tip-box">
+              <span class="tip-icon">⚡</span>
+              <span>Alternativa para quem não quer acordar às 5h: sair na quinta à noite de Floripa após o jantar (já sem hospedagem na sexta) e dormir em Jaraguá. Mas perde a Ilha do Campeche na sexta. Não compensa.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /day6 -->
+
+  </div><!-- /days-container -->
+
+  <!-- ─── TOTALIZADOR FINAL ─── -->
+  <div style="margin-top:40px;">
+    <div class="section-title">Fechamento — Total da viagem por pessoa</div>
+    <div class="day-budget-table" style="border-radius:14px;">
+      <div class="dbt-row"><span class="dbt-label">Dom — Jaraguá + Pomerode</span><span class="dbt-value">R$ 209</span></div>
+      <div class="dbt-row"><span class="dbt-label">Seg — São Francisco do Sul (com Pier 65)</span><span class="dbt-value">R$ 256</span></div>
+      <div class="dbt-row"><span class="dbt-label">Ter — Praia Brava + Balneário + Uvva</span><span class="dbt-value">R$ 296</span></div>
+      <div class="dbt-row"><span class="dbt-label">Qua — BC + Itapema + Rooftop</span><span class="dbt-value">R$ 200</span></div>
+      <div class="dbt-row"><span class="dbt-label">Qui — Floripa histórico + Seu Antônio</span><span class="dbt-value">R$ 245</span></div>
+      <div class="dbt-row"><span class="dbt-label">Sex — Ilha do Campeche + jantar</span><span class="dbt-value">R$ 235</span></div>
+      <div class="dbt-row"><span class="dbt-label">Sáb — Retorno</span><span class="dbt-value">R$ 47</span></div>
+      <div class="dbt-row total" style="background:rgba(201,146,42,.1);">
+        <span class="dbt-label" style="color:var(--sand);">TOTAL — Versão completa (todos os extras)</span>
+        <span class="dbt-value total-v" style="font-size:18px;">R$ 1.488</span>
+      </div>
+      <div class="dbt-row total" style="background:rgba(29,122,79,.08);">
+        <span class="dbt-label" style="color:#a0d8b0;">TOTAL — Versão econômica (cortes estratégicos)</span>
+        <span class="dbt-value total-v" style="color:#5abf8a; font-size:18px;">R$ 1.190</span>
+      </div>
+    </div>
+
+    <div class="tip-box" style="margin-top:16px; background:rgba(201,146,42,.06); border-color:rgba(201,146,42,.2);">
+      <span class="tip-icon">🏆</span>
+      <div style="font-size:13px; color:var(--sand2);">
+        <strong style="color:var(--gold2);">Cortes estratégicos para caber em R$ 1.200:</strong><br>
+        Pular Pier 65 (−R$ 70) · Trocar Seu Antônio por frutos do mar simples (−R$ 65) · Café da manhã feito no Airbnb todos os dias (−R$ 90) · Pular Hike Beach Club (−R$ 25) = <strong>−R$ 250 → chega em ~R$ 1.240.</strong>
+        Com R$ 1.400, você curte tudo sem sacrificar nada importante.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /section -->
+
+<footer>
+  Roteiro SC · 4 amigos · Gol 1.6 · 624 km · Verão · Feito com carinho para vocês curtirem demais
+</footer>
+
+<script>
+function toggle(id) {
+  const card = document.getElementById(id);
+  const body = document.getElementById(id + '-body');
+  const isOpen = card.classList.contains('open');
+  
+  // Close all
+  document.querySelectorAll('.day-card').forEach(c => c.classList.remove('open'));
+  document.querySelectorAll('.day-body').forEach(b => b.style.maxHeight = '0');
+  
+  // Open clicked if it was closed
+  if (!isOpen) {
+    card.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    // Re-measure after content is visible for nested elements
+    setTimeout(() => {
+      body.style.maxHeight = body.scrollHeight + 400 + 'px';
+    }, 50);
+  }
+}
+
+// Open day 0 by default
+window.addEventListener('DOMContentLoaded', () => {
+  toggle('day0');
+});
+</script>
+
+</body>
+</html>
