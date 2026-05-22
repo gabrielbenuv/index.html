@@ -859,8 +859,12 @@
   },{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-  // form -> whatsapp
-  var WA='5547984226825';
+  // ====== CONFIGURAÇÃO ======
+  // Cole sua chave do Web3Forms entre as aspas abaixo (pegue em https://web3forms.com)
+  var WEB3FORMS_KEY = 'fab1b54f-a3a8-4777-a163-29a97868cb60';
+  var WA = '5547984226825';
+  // ===========================
+
   document.getElementById('leadForm').addEventListener('submit',function(ev){
     ev.preventDefault();
     var nome=document.getElementById('nome').value.trim();
@@ -870,18 +874,52 @@
     var esp=document.getElementById('esp').value;
     var dor=document.getElementById('dor').value;
     var err=document.getElementById('formErr');
+    var btn=document.querySelector('#leadForm button[type=submit]');
+
     if(!nome||!whats){err.style.display='block';return;}
     err.style.display='none';
-    var msg='Olá! Quero conhecer a Bia. 👋\n\n';
-    msg+='*Nome:* '+nome+'\n';
-    if(clinica) msg+='*Clínica:* '+clinica+'\n';
-    msg+='*WhatsApp:* '+whats+'\n';
-    if(email) msg+='*E-mail:* '+email+'\n';
-    if(esp) msg+='*Especialidade:* '+esp+'\n';
-    if(dor) msg+='*Maior dor hoje:* '+dor+'\n';
-    var url='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
-    window.open(url,'_blank');
+
+    // Monta a mensagem do WhatsApp
+    var msg='Olá! Quero conhecer a Bia.\n\n';
+    msg+='Nome: '+nome+'\n';
+    if(clinica) msg+='Clínica: '+clinica+'\n';
+    msg+='WhatsApp: '+whats+'\n';
+    if(email) msg+='E-mail: '+email+'\n';
+    if(esp) msg+='Especialidade: '+esp+'\n';
+    if(dor) msg+='Maior dor hoje: '+dor+'\n';
+    var waUrl='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+
+    // Abre o WhatsApp imediatamente (numa nova aba) para não perder o lead,
+    // mesmo se o envio do e-mail demorar ou falhar.
+    var waWin=window.open(waUrl,'_blank');
+
+    // Envia os dados para o seu e-mail via Web3Forms (em paralelo)
+    if(WEB3FORMS_KEY && WEB3FORMS_KEY!=='COLE_SUA_CHAVE_AQUI'){
+      var original=btn.innerHTML;
+      btn.disabled=true;
+      var payload={
+        access_key: WEB3FORMS_KEY,
+        subject: 'Novo lead da Bia — '+nome+(clinica?(' ('+clinica+')'):''),
+        from_name: 'Site da Bia (Klivy)',
+        nome: nome,
+        clinica: clinica||'(não informado)',
+        whatsapp: whats,
+        email_do_lead: email||'(não informado)',
+        especialidade: esp||'(não informado)',
+        maior_dor: dor||'(não informado)'
+      };
+      fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify(payload)
+      }).then(function(r){return r.json();})
+        .then(function(){ btn.disabled=false; btn.innerHTML=original; document.getElementById('leadForm').reset(); })
+        .catch(function(){ btn.disabled=false; btn.innerHTML=original; });
+    }
+    // Se a aba do WhatsApp foi bloqueada pelo navegador, redireciona na mesma aba
+    if(!waWin){ window.location.href=waUrl; }
   });
+
 </script>
 </body>
 </html>
