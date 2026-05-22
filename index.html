@@ -3,1278 +3,885 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Roteiro SC — 4 Amigos · Verão</title>
+<title>Bia — a inteligência da Klivy para clínicas</title>
+<meta name="description" content="A Bia é a IA da Klivy que atende, agenda, cobra via Pix e organiza sua clínica 24h por dia dentro do WhatsApp. Da recepção à gestão.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy:    #0B1825;
-    --navy2:   #112233;
-    --card:    #131F2E;
-    --card2:   #1A2B3C;
-    --gold:    #C9922A;
-    --gold2:   #E8B04A;
-    --sand:    #EDE4D0;
-    --sand2:   #D4C9B0;
-    --teal:    #1A8FA8;
-    --teal2:   #22AFCC;
-    --red:     #C0392B;
-    --green:   #1D7A4F;
-    --muted:   #5A7080;
-    --border:  rgba(201,146,42,0.18);
+  :root{
+    --azul:#0A6CFF;
+    --azul-eletrico:#21C8FF;
+    --roxo:#9B5CFF;
+    --navy:#07153D;
+    --gelo:#F7FAFC;
+    --branco-soft:#FCFCFE;
+    --cinza-ui:#DCE5F2;
+    --cinza-texto:#7E8AA8;
+    --grad:linear-gradient(135deg,#21C8FF 0%,#0A6CFF 45%,#9B5CFF 100%);
+    --grad-soft:linear-gradient(135deg,#F7FAFC 0%,#EAF6FF 35%,#F5EEFF 100%);
+    --shadow-sm:0 2px 8px rgba(7,21,61,.05);
+    --shadow-md:0 18px 40px -18px rgba(10,108,255,.28);
+    --shadow-lg:0 40px 80px -30px rgba(7,21,61,.30);
+    --radius:22px;
+    --radius-lg:30px;
+    --maxw:1180px;
+    --ff-display:'Sora',sans-serif;
+    --ff-body:'Plus Jakarta Sans',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--ff-body);
+    color:var(--navy);
+    background:var(--branco-soft);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:var(--ff-display);line-height:1.1;letter-spacing:-.02em;font-weight:700}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .eyebrow{
+    font-family:var(--ff-display);font-weight:700;font-size:.74rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--azul);display:inline-block;
   }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-family:var(--ff-display);font-weight:600;font-size:.98rem;
+    padding:15px 28px;border-radius:100px;border:none;cursor:pointer;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,filter .25s;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--grad);color:#fff;box-shadow:var(--shadow-md)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 24px 50px -16px rgba(10,108,255,.5);filter:brightness(1.05)}
+  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--cinza-ui)}
+  .btn-ghost:hover{border-color:var(--azul);color:var(--azul);transform:translateY(-2px)}
+  .btn-white{background:#fff;color:var(--navy)}
+  .btn-white:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .btn svg{width:18px;height:18px}
 
-  body {
-    background: var(--navy);
-    color: var(--sand);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+  /* ---------- nav ---------- */
+  header.nav{position:sticky;top:0;z-index:100;background:rgba(252,252,254,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(220,229,242,.7)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--ff-display);font-weight:700;font-size:1.5rem;letter-spacing:-.03em}
+  .brand .ico{width:34px;height:38px;flex:none}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-size:.95rem;font-weight:500;color:#41506e;transition:color .2s}
+  .nav-links a:hover{color:var(--azul)}
+  .nav-cta{display:flex;align-items:center;gap:14px}
+  .nav-cta .btn{padding:11px 22px;font-size:.9rem}
+  .burger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+  .burger span{width:24px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
 
-  /* ─── HERO ─── */
-  .hero {
-    position: relative;
-    padding: 70px 24px 56px;
-    text-align: center;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero::before {
-    content:'';
-    position:absolute; inset:0;
-    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,146,42,.12) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 80% 80%, rgba(26,143,168,.08) 0%, transparent 60%);
-    pointer-events:none;
-  }
-  .hero-eyebrow {
-    font-family:'DM Mono', monospace;
-    font-size:11px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:18px;
-    opacity:.9;
-  }
-  .hero h1 {
-    font-family:'Cormorant Garamond', serif;
-    font-size: clamp(40px, 8vw, 72px);
-    font-weight:600;
-    line-height:1.05;
-    color:var(--sand);
-    margin-bottom:10px;
-  }
-  .hero h1 em { font-style:italic; color:var(--gold2); }
-  .hero-sub {
-    font-size:15px;
-    color:var(--sand2);
-    opacity:.75;
-    max-width:480px;
-    margin:0 auto 36px;
-  }
-  .hero-meta {
-    display:flex;
-    justify-content:center;
-    gap:28px;
-    flex-wrap:wrap;
-  }
-  .meta-pill {
-    display:flex; align-items:center; gap:8px;
-    background:rgba(255,255,255,.04);
-    border:1px solid var(--border);
-    border-radius:99px;
-    padding:8px 18px;
-    font-size:13px;
-    color:var(--sand2);
-  }
-  .meta-pill .icon { font-size:16px; }
+  /* ---------- hero ---------- */
+  .hero{position:relative;background:var(--grad-soft);overflow:hidden;padding:74px 0 90px}
+  .hero::before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:-160px;background:radial-gradient(circle,rgba(33,200,255,.40),transparent 65%);filter:blur(10px)}
+  .hero::after{content:"";position:absolute;width:480px;height:480px;left:-180px;bottom:-220px;background:radial-gradient(circle,rgba(155,92,255,.30),transparent 65%)}
+  .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+  .hero h1{font-size:clamp(2.4rem,5vw,3.7rem);font-weight:800;margin:22px 0 20px}
+  .hero p.lead{font-size:1.18rem;color:#3a4a6b;max-width:540px;margin-bottom:32px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+  .trust-row{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;font-size:.82rem;color:var(--cinza-texto);font-weight:500}
+  .trust-row .chip{display:inline-flex;align-items:center;gap:6px}
+  .trust-row .dot{width:5px;height:5px;border-radius:50%;background:var(--azul-eletrico)}
 
-  /* ─── ALERTA ORÇAMENTO ─── */
-  .budget-alert {
-    margin:24px auto;
-    max-width:780px;
-    padding:18px 22px;
-    border-radius:12px;
-    border-left:4px solid var(--red);
-    background:rgba(192,57,43,.08);
-    display:flex; align-items:flex-start; gap:14px;
-  }
-  .budget-alert .icon-big { font-size:28px; flex-shrink:0; margin-top:2px; }
-  .budget-alert strong { color:#e08070; }
-  .budget-alert p { font-size:13.5px; color:var(--sand2); margin-top:4px; line-height:1.5; }
+  /* phone mockup */
+  .phone{position:relative;justify-self:center;width:312px;background:#0c1a36;border-radius:42px;padding:13px;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.08)}
+  .phone .notch{position:absolute;top:13px;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#0c1a36;border-radius:0 0 16px 16px;z-index:3}
+  .screen{background:#e9eef6;border-radius:31px;overflow:hidden;height:560px;display:flex;flex-direction:column}
+  .chat-top{background:var(--grad);padding:34px 16px 14px;display:flex;align-items:center;gap:11px;color:#fff}
+  .chat-top .av{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-weight:700;font-size:1.05rem}
+  .chat-top .who{font-family:var(--ff-display);font-weight:700;font-size:.98rem;line-height:1.15}
+  .chat-top .stat{font-size:.72rem;opacity:.9;display:flex;align-items:center;gap:5px}
+  .chat-top .stat::before{content:"";width:7px;height:7px;border-radius:50%;background:#5dffb0;box-shadow:0 0 0 3px rgba(93,255,176,.25)}
+  .chat-body{flex:1;padding:16px 14px;display:flex;flex-direction:column;gap:11px;background:#eef2f8;overflow:hidden}
+  .bub{max-width:80%;padding:10px 13px;border-radius:16px;font-size:.83rem;line-height:1.4;box-shadow:0 1px 2px rgba(7,21,61,.07)}
+  .bub .t{display:block;font-size:.62rem;opacity:.55;margin-top:5px;font-weight:600}
+  .bub.in{background:#fff;border-bottom-left-radius:4px;align-self:flex-start;color:#1d2944}
+  .bub.out{background:var(--grad);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .bub.out .t{opacity:.8}
+  .speed-tag{align-self:flex-end;display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--cinza-ui);color:var(--azul);font-family:var(--ff-display);font-weight:700;font-size:.72rem;padding:6px 11px;border-radius:100px;box-shadow:var(--shadow-sm)}
+  .speed-tag svg{width:13px;height:13px;flex:none}
+  .float-card{position:absolute;z-index:5;background:#fff;border-radius:16px;padding:13px 15px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:11px;border:1px solid rgba(220,229,242,.8);white-space:nowrap}
+  .float-card .ic{width:38px;height:38px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex:none}
+  .float-card .ic svg{width:20px;height:20px;color:#fff}
+  .float-card .lbl{font-size:.68rem;color:var(--cinza-texto);font-weight:600;line-height:1.2;white-space:nowrap}
+  .float-card .val{font-family:var(--ff-display);font-weight:700;font-size:.95rem;white-space:nowrap}
+  .fc-1{top:-26px;left:-30px}
+  .fc-2{bottom:48px;right:-30px}
 
-  /* ─── RESUMO FINANCEIRO ─── */
-  .finance-grid {
-    display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
-    gap:14px;
-    max-width:780px;
-    margin:0 auto 40px;
-    padding:0 24px;
-  }
-  .fin-card {
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:18px 20px;
-    position:relative;
-    overflow:hidden;
-  }
-  .fin-card::before {
-    content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
-    background:var(--gold);
-    opacity:.4;
-  }
-  .fin-card.highlight::before { background:var(--teal); opacity:.7; }
-  .fin-card.warn::before { background:var(--red); opacity:.7; }
-  .fin-label {
-    font-family:'DM Mono', monospace;
-    font-size:10px; letter-spacing:2px; text-transform:uppercase;
-    color:var(--muted); margin-bottom:6px;
-  }
-  .fin-value {
-    font-family:'Cormorant Garamond', serif;
-    font-size:28px; font-weight:600; color:var(--gold2);
-  }
-  .fin-value.teal { color:var(--teal2); }
-  .fin-value.red { color:#e08070; }
-  .fin-desc { font-size:12px; color:var(--muted); margin-top:4px; }
+  /* ---------- generic section ---------- */
+  section{padding:96px 0}
+  .sec-head{max-width:720px;margin-bottom:54px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:16px 0 16px}
+  .sec-head p{font-size:1.1rem;color:#48597a}
 
-  /* ─── SEÇÃO ─── */
-  .section {
-    max-width:780px;
-    margin:0 auto;
-    padding:0 24px 60px;
-  }
-  .section-title {
-    font-family:'Cormorant Garamond', serif;
-    font-size:13px; font-weight:600;
-    letter-spacing:4px; text-transform:uppercase;
-    color:var(--gold); margin-bottom:20px;
-    display:flex; align-items:center; gap:12px;
-  }
-  .section-title::after {
-    content:''; flex:1; height:1px; background:var(--border);
-  }
+  /* intro / definição */
+  .intro{background:#fff}
+  .intro-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--cinza-ui);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+  .intro-card .left{padding:54px 48px;display:flex;flex-direction:column;justify-content:center}
+  .intro-card .left h2{font-size:clamp(1.7rem,3vw,2.3rem);margin:14px 0 18px}
+  .intro-card .left p{color:#48597a;font-size:1.06rem}
+  .intro-card .right{background:var(--navy);padding:54px 44px;display:flex;flex-direction:column;justify-content:center;gap:22px;color:#fff;position:relative;overflow:hidden}
+  .intro-card .right::after{content:"";position:absolute;width:300px;height:300px;right:-100px;bottom:-120px;background:radial-gradient(circle,rgba(155,92,255,.4),transparent 70%)}
+  .formula{position:relative;z-index:1}
+  .formula .row{display:flex;align-items:flex-start;gap:14px;margin-bottom:6px}
+  .formula .op{font-family:var(--ff-display);font-weight:800;font-size:1.7rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;width:30px;flex:none;line-height:1.3}
+  .formula .txt{font-size:1.02rem;color:#c9d6f0}
+  .formula .txt b{color:#fff;font-family:var(--ff-display);font-weight:600;display:block;font-size:1.08rem}
 
-  /* ─── LINHA DE ROTA ─── */
-  .route-bar {
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:20px 22px;
-    margin-bottom:14px;
-    display:flex; align-items:center; gap:12px;
-    font-size:13px;
-  }
-  .route-seg { display:flex; align-items:center; gap:6px; flex:1; }
-  .route-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); flex-shrink:0; }
-  .route-line { flex:1; height:1px; border-top:1px dashed rgba(201,146,42,.3); }
-  .route-km { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); }
+  /* dark loss section */
+  .loss{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .loss::before{content:"";position:absolute;width:600px;height:600px;left:-200px;top:-200px;background:radial-gradient(circle,rgba(10,108,255,.22),transparent 65%)}
+  .loss .eyebrow{color:var(--azul-eletrico)}
+  .loss h2{font-size:clamp(2rem,4vw,3rem);margin:16px 0 0;color:#fff}
+  .loss .scene{position:relative;z-index:1;margin:46px 0;border-left:3px solid;border-image:var(--grad) 1;padding:8px 0 8px 26px;max-width:600px}
+  .loss .scene .time{font-family:var(--ff-display);font-weight:800;font-size:1.5rem}
+  .loss .scene .q{font-size:1.3rem;color:#dbe4f7;margin:6px 0 14px;font-style:italic}
+  .loss .scene p{color:#9fb0d4;font-size:1rem}
+  .loss-stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:30px}
+  .loss-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:26px 22px}
+  .loss-stat .n{font-family:var(--ff-display);font-weight:800;font-size:2.2rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .loss-stat .l{font-size:.92rem;color:#c2cfe9;margin-top:6px}
+  .loss-stat .src{font-size:.72rem;color:#6f80a6;margin-top:10px}
+  .vs-line{position:relative;z-index:1;margin-top:44px;display:flex;align-items:center;gap:30px;flex-wrap:wrap;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:28px 32px}
+  .vs-line .vs-item{display:flex;flex-direction:column}
+  .vs-line .vs-item .lab{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#7e8fb4;font-weight:600}
+  .vs-line .vs-item .big{font-family:var(--ff-display);font-weight:800;font-size:2rem}
+  .vs-line .arrow{font-size:1.6rem;color:var(--azul-eletrico)}
+  .vs-line .now .big{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
-  /* ─── ACORDEON DIAS ─── */
-  .days-container { display:flex; flex-direction:column; gap:12px; }
+  /* 3 atos */
+  .atos{background:var(--gelo)}
+  .atos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .ato{background:#fff;border:1px solid var(--cinza-ui);border-radius:var(--radius-lg);padding:34px 30px;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .ato:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:transparent}
+  .ato .tag{font-family:var(--ff-display);font-weight:700;font-size:.72rem;letter-spacing:.14em;color:var(--azul);background:rgba(33,200,255,.12);padding:6px 12px;border-radius:100px;display:inline-block}
+  .ato h3{font-size:1.45rem;margin:18px 0 8px}
+  .ato>p{color:#5a6a8a;font-size:.95rem;margin-bottom:22px}
+  .ato ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .ato li{display:flex;gap:12px;align-items:flex-start;font-size:.92rem}
+  .ato li .ck{width:22px;height:22px;border-radius:7px;background:var(--grad);flex:none;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .ato li .ck svg{width:13px;height:13px;color:#fff}
+  .ato li b{font-family:var(--ff-display);font-weight:600;display:block;font-size:.95rem}
+  .ato li span{color:#6a7a9a;font-size:.85rem}
 
-  .day-card {
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    overflow:hidden;
-    transition:border-color .25s;
-  }
-  .day-card.open { border-color:rgba(201,146,42,.45); }
+  /* tech */
+  .tech{background:#fff}
+  .tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .tech-card{border:1px solid var(--cinza-ui);border-radius:var(--radius);padding:26px 24px;transition:.3s}
+  .tech-card:hover{border-color:var(--azul);box-shadow:var(--shadow-sm)}
+  .tech-card .k{font-family:var(--ff-display);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza-texto);font-weight:600}
+  .tech-card .v{font-family:var(--ff-display);font-weight:700;font-size:1.25rem;margin:6px 0 8px}
+  .tech-card .d{font-size:.88rem;color:#5a6a8a}
 
-  .day-header {
-    display:flex; align-items:center; gap:16px;
-    padding:20px 22px;
-    cursor:pointer;
-    user-select:none;
-    transition:background .2s;
-  }
-  .day-header:hover { background:rgba(255,255,255,.025); }
+  /* steps */
+  .steps{background:var(--gelo)}
+  .steps-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+  .step{padding:0 16px;position:relative}
+  .step .num{width:46px;height:46px;border-radius:50%;background:var(--grad);color:#fff;font-family:var(--ff-display);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:var(--shadow-md);margin-bottom:18px}
+  .step h4{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--azul);margin-bottom:8px}
+  .step p{font-size:.9rem;color:#5a6a8a}
+  .step:not(:last-child)::after{content:"";position:absolute;top:23px;left:54px;right:-8px;height:2px;background:linear-gradient(90deg,var(--azul-eletrico),transparent)}
+  .steps-note{margin-top:42px;text-align:center;font-size:1rem;color:#48597a}
+  .steps-note b{color:var(--navy);font-family:var(--ff-display)}
 
-  .day-num {
-    font-family:'Cormorant Garamond', serif;
-    font-size:36px; font-weight:600;
-    line-height:1; color:var(--gold);
-    opacity:.35;
-    width:40px; flex-shrink:0; text-align:center;
-  }
-  .day-card.open .day-num { opacity:.9; }
+  /* comparativo */
+  .compare{background:#fff}
+  .table-scroll{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--cinza-ui);box-shadow:var(--shadow-sm)}
+  table{width:100%;border-collapse:collapse;min-width:640px}
+  th,td{padding:17px 18px;text-align:left;font-size:.92rem;border-bottom:1px solid var(--cinza-ui)}
+  thead th{font-family:var(--ff-display);font-weight:600;font-size:.86rem;color:var(--cinza-texto);background:var(--gelo)}
+  thead th.bia{background:var(--grad);color:#fff;font-weight:700;font-size:1rem;border-radius:14px 14px 0 0}
+  td:first-child{font-weight:600;color:var(--navy)}
+  td.bia{background:rgba(33,200,255,.07);font-family:var(--ff-display);font-weight:600;color:var(--navy)}
+  td.no{color:#aab6ce}
+  tbody tr:last-child td{border-bottom:none}
+  .compare-foot{margin-top:24px;text-align:center;font-family:var(--ff-display);font-weight:600;font-size:1.15rem;color:var(--navy)}
 
-  .day-info { flex:1; }
-  .day-label {
-    font-family:'DM Mono', monospace;
-    font-size:10px; letter-spacing:2.5px; text-transform:uppercase;
-    color:var(--muted); margin-bottom:3px;
-  }
-  .day-title {
-    font-family:'Cormorant Garamond', serif;
-    font-size:22px; font-weight:600; color:var(--sand);
-    line-height:1.15;
-  }
-  .day-subtitle {
-    font-size:12.5px; color:var(--muted); margin-top:3px;
-  }
+  /* cases */
+  .cases{background:var(--gelo)}
+  .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .case{background:#fff;border:1px solid var(--cinza-ui);border-radius:var(--radius-lg);padding:32px 28px}
+  .case .who{font-family:var(--ff-display);font-weight:700;font-size:1.08rem}
+  .case .sub{font-size:.83rem;color:var(--cinza-texto);margin-bottom:20px}
+  .case .metric{display:flex;align-items:baseline;gap:10px;padding:12px 0;border-top:1px dashed var(--cinza-ui)}
+  .case .metric .arrow-m{font-family:var(--ff-display);font-weight:800;font-size:1.05rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+  .case .metric .ml{font-size:.84rem;color:#5a6a8a}
+  .cases-disc{margin-top:26px;text-align:center;font-size:.84rem;color:var(--cinza-texto);font-style:italic;max-width:680px;margin-left:auto;margin-right:auto}
 
-  .day-meta {
-    display:flex; flex-direction:column; align-items:flex-end; gap:6px;
-    flex-shrink:0;
-  }
-  .day-budget-pill {
-    font-family:'DM Mono', monospace; font-size:12px;
-    background:rgba(201,146,42,.1);
-    border:1px solid rgba(201,146,42,.3);
-    color:var(--gold2);
-    padding:4px 12px; border-radius:99px;
-  }
-  .day-budget-pill.tight {
-    background:rgba(192,57,43,.1);
-    border-color:rgba(192,57,43,.3);
-    color:#e08070;
-  }
-  .day-budget-pill.free {
-    background:rgba(29,122,79,.1);
-    border-color:rgba(29,122,79,.3);
-    color:#5abf8a;
-  }
-  .chevron {
-    font-size:18px; color:var(--muted);
-    transition:transform .3s; flex-shrink:0;
-  }
-  .day-card.open .chevron { transform:rotate(180deg); color:var(--gold); }
+  /* form / CTA */
+  .cta{background:var(--navy);position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;width:560px;height:560px;right:-160px;top:-160px;background:radial-gradient(circle,rgba(155,92,255,.28),transparent 65%)}
+  .cta::after{content:"";position:absolute;width:520px;height:520px;left:-180px;bottom:-220px;background:radial-gradient(circle,rgba(33,200,255,.22),transparent 65%)}
+  .cta-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+  .cta-left .eyebrow{color:var(--azul-eletrico)}
+  .cta-left h2{font-size:clamp(2rem,3.8vw,2.8rem);color:#fff;margin:16px 0 18px}
+  .cta-left p{color:#aebcdb;font-size:1.08rem;margin-bottom:28px}
+  .cta-left .mini{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+  .cta-left .mini .m{display:flex;gap:12px;align-items:flex-start}
+  .cta-left .mini .mn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--azul-eletrico);color:var(--azul-eletrico);display:flex;align-items:center;justify-content:center;font-family:var(--ff-display);font-weight:700;font-size:.85rem;flex:none}
+  .cta-left .mini .mt{font-size:.95rem;color:#c9d6f0}
+  .cta-left .mini .mt b{color:#fff;font-family:var(--ff-display);display:block;font-size:1rem}
+  .form-card{background:#fff;border-radius:var(--radius-lg);padding:38px 34px;box-shadow:var(--shadow-lg)}
+  .form-card h3{font-size:1.4rem;margin-bottom:6px}
+  .form-card .fsub{font-size:.92rem;color:#5a6a8a;margin-bottom:26px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:7px;font-family:var(--ff-display)}
+  .field input,.field select{width:100%;padding:13px 15px;border:1.5px solid var(--cinza-ui);border-radius:13px;font-family:var(--ff-body);font-size:.95rem;color:var(--navy);background:var(--branco-soft);transition:.2s}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 4px rgba(10,108,255,.1)}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .form-card .btn{width:100%;margin-top:8px}
+  .form-card .legal{font-size:.74rem;color:var(--cinza-texto);text-align:center;margin-top:14px}
+  .form-card .err{font-size:.78rem;color:#e0466b;margin-top:6px;display:none}
 
-  /* ─── CONTEÚDO DO DIA ─── */
-  .day-body {
-    max-height:0; overflow:hidden;
-    transition:max-height .5s cubic-bezier(.4,0,.2,1);
-  }
-  .day-body-inner {
-    padding:0 22px 26px;
-    border-top:1px solid var(--border);
-  }
+  /* faq */
+  .faq{background:#fff}
+  .faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+  .faq-item{border:1px solid var(--cinza-ui);border-radius:18px;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+  .faq-item.open{border-color:var(--azul);box-shadow:var(--shadow-sm)}
+  .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--ff-display);font-weight:600;font-size:1.05rem;color:var(--navy)}
+  .faq-q .ic{width:28px;height:28px;flex:none;border-radius:50%;background:var(--gelo);display:flex;align-items:center;justify-content:center;transition:.3s;font-size:1.2rem;color:var(--azul)}
+  .faq-item.open .faq-q .ic{background:var(--grad);color:#fff;transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+  .faq-a p{padding:0 24px 22px;color:#566784;font-size:.97rem}
 
-  /* sub-seção dentro do dia */
-  .day-section { margin-top:22px; }
-  .day-section-title {
-    font-family:'DM Mono', monospace;
-    font-size:10px; letter-spacing:2px; text-transform:uppercase;
-    color:var(--teal2); margin-bottom:12px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .day-section-title::after {
-    content:''; flex:1; height:1px; background:rgba(34,175,204,.15);
+  /* footer */
+  footer{background:var(--gelo);border-top:1px solid var(--cinza-ui);padding:60px 0 34px}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+  .foot-brand{max-width:340px}
+  .foot-brand .brand{margin-bottom:14px}
+  .foot-brand p{color:#5a6a8a;font-size:.95rem}
+  .foot-cta h4{font-size:1.1rem;margin-bottom:14px}
+  .foot-bottom{border-top:1px solid var(--cinza-ui);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.83rem;color:var(--cinza-texto)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ============ RESPONSIVE ============ */
+
+  /* tablet */
+  @media(max-width:980px){
+    .hero-grid,.cta-grid{grid-template-columns:1fr;gap:48px}
+    .intro-card{grid-template-columns:1fr}
+    .atos-grid,.tech-grid,.cases-grid{grid-template-columns:1fr 1fr}
+    .loss-stats{grid-template-columns:1fr 1fr}
+    .steps-wrap{grid-template-columns:1fr 1fr;gap:30px 16px}
+    .step:not(:last-child)::after{display:none}
+    .phone{order:-1}
+    .hero-copy{text-align:center;display:flex;flex-direction:column;align-items:center}
+    .hero p.lead{margin-left:auto;margin-right:auto}
+    .hero-ctas{justify-content:center}
+    .trust-row{justify-content:center}
   }
 
-  /* atividades */
-  .activity-list { display:flex; flex-direction:column; gap:10px; }
-  .activity {
-    display:flex; gap:14px; align-items:flex-start;
-    background:var(--card2);
-    border-radius:10px; padding:12px 14px;
-  }
-  .activity-icon { font-size:20px; flex-shrink:0; margin-top:1px; }
-  .activity-name { font-size:14px; font-weight:500; color:var(--sand); }
-  .activity-desc { font-size:12.5px; color:var(--muted); margin-top:2px; }
-  .activity-cost {
-    margin-left:auto; flex-shrink:0;
-    font-family:'DM Mono', monospace; font-size:12px;
-    color:var(--gold2); white-space:nowrap; align-self:center;
-  }
-  .activity-cost.free { color:#5abf8a; }
-
-  /* refeições */
-  .meal-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  @media(max-width:500px){ .meal-grid{ grid-template-columns:1fr; } }
-  .meal-card {
-    background:var(--card2); border-radius:10px; padding:12px 14px;
-    border-left:3px solid transparent;
-  }
-  .meal-card.almoco { border-left-color:rgba(201,146,42,.5); }
-  .meal-card.jantar { border-left-color:rgba(26,143,168,.5); }
-  .meal-card.brunch { border-left-color:rgba(90,191,138,.4); }
-  .meal-type {
-    font-family:'DM Mono', monospace; font-size:10px; letter-spacing:1.5px;
-    text-transform:uppercase; color:var(--muted); margin-bottom:4px;
-  }
-  .meal-name { font-size:14px; font-weight:500; color:var(--sand); }
-  .meal-detail { font-size:12px; color:var(--muted); margin-top:3px; }
-  .meal-cost { font-family:'DM Mono', monospace; font-size:12px; color:var(--gold2); margin-top:6px; }
-
-  /* hospedagem */
-  .hotel-block {
-    background:var(--card2); border-radius:10px; padding:14px 16px;
-    display:flex; gap:14px; align-items:flex-start;
-  }
-  .hotel-icon { font-size:22px; flex-shrink:0; }
-  .hotel-name { font-size:14px; font-weight:500; color:var(--sand); }
-  .hotel-detail { font-size:12.5px; color:var(--muted); margin-top:3px; }
-  .hotel-cost {
-    margin-left:auto; flex-shrink:0;
-    font-family:'DM Mono', monospace; font-size:13px;
-    color:var(--gold2); white-space:nowrap;
+  /* phone landscape / small tablet */
+  @media(max-width:680px){
+    .nav-links{display:none}
+    .nav-cta .btn-ghost{display:none}
+    .burger{display:flex}
+    .mobile-menu.open{display:flex}
+    .atos-grid,.tech-grid,.cases-grid,.loss-stats{grid-template-columns:1fr}
+    .steps-wrap{grid-template-columns:1fr;gap:22px}
+    .field-row{grid-template-columns:1fr;gap:0}
+    .vs-line{flex-direction:column;align-items:flex-start;gap:16px}
+    .vs-line .arrow{transform:rotate(90deg);align-self:center}
   }
 
-  /* resumo financeiro do dia */
-  .day-budget-table {
-    background:rgba(0,0,0,.2);
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-    margin-top:4px;
-  }
-  .dbt-row {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:9px 14px; font-size:13px;
-    border-bottom:1px solid var(--border);
-  }
-  .dbt-row:last-child { border-bottom:none; }
-  .dbt-row.total {
-    background:rgba(201,146,42,.07);
-    font-weight:600;
-  }
-  .dbt-label { color:var(--sand2); }
-  .dbt-value { font-family:'DM Mono', monospace; color:var(--gold2); }
-  .dbt-value.total-v {
-    font-size:15px; color:var(--gold);
+  /* the real mobile pass — phones */
+  @media(max-width:560px){
+    :root{--radius:18px;--radius-lg:22px}
+    .wrap{padding:0 18px}
+    section{padding:60px 0}
+
+    /* nav */
+    .nav-inner{height:62px}
+    .brand{font-size:1.28rem;gap:8px}
+    .brand .ico{width:28px;height:32px}
+    .nav-cta .btn-primary{padding:10px 16px;font-size:.82rem}
+
+    /* hero */
+    .hero{padding:40px 0 56px}
+    .hero::before{width:300px;height:300px;right:-90px;top:-110px}
+    .hero::after{width:300px;height:300px;left:-120px;bottom:-140px}
+    .hero-grid{gap:38px}
+    .hero h1{font-size:2.05rem;margin:16px 0 16px;line-height:1.12}
+    .hero p.lead{font-size:1.02rem;margin-bottom:26px}
+    .eyebrow{font-size:.66rem;letter-spacing:.14em}
+    .hero-ctas{flex-direction:column;gap:11px;width:100%}
+    .hero-ctas .btn{width:100%;padding:15px 20px}
+    .trust-row{font-size:.76rem;gap:8px 14px}
+
+    /* phone mockup — scale down so it never overflows */
+    .phone{width:min(280px,84vw);padding:11px;border-radius:34px}
+    .phone .notch{width:100px;height:20px}
+    .screen{height:480px;border-radius:25px}
+    .chat-top{padding:30px 13px 12px}
+    .chat-top .av{width:32px;height:32px;font-size:.92rem}
+    .chat-top .who{font-size:.9rem}
+    .chat-top .stat{font-size:.66rem}
+    .bub{font-size:.78rem;max-width:82%;padding:9px 11px}
+    .speed-tag{font-size:.66rem;padding:5px 9px}
+    .float-card{padding:9px 11px;border-radius:13px;gap:8px}
+    .float-card .ic{width:30px;height:30px;border-radius:9px}
+    .float-card .ic svg{width:16px;height:16px}
+    .float-card .lbl{font-size:.6rem}
+    .float-card .val{font-size:.82rem}
+    .float-card{display:none}
+    .fc-1{left:-2px;top:-14px}
+    .fc-2{right:-2px;bottom:34px}
+
+    /* section heads */
+    .sec-head{margin-bottom:36px}
+    .sec-head h2{font-size:1.6rem;margin:12px 0 12px}
+    .sec-head p{font-size:1rem}
+
+    /* intro card */
+    .intro-card .left,.intro-card .right{padding:32px 24px}
+    .intro-card .left h2{font-size:1.45rem}
+    .intro-card .left p{font-size:1rem}
+    .formula .op{font-size:1.4rem;width:24px}
+    .formula .txt{font-size:.95rem}
+    .formula .txt b{font-size:1rem}
+
+    /* loss */
+    .loss h2{font-size:1.7rem}
+    .loss .scene{margin:32px 0;padding-left:20px}
+    .loss .scene .time{font-size:1.3rem}
+    .loss .scene .q{font-size:1.12rem}
+    .loss .scene p{font-size:.95rem}
+    .loss-stats{gap:14px;margin-top:24px}
+    .loss-stat{padding:22px 20px}
+    .loss-stat .n{font-size:1.9rem}
+    .loss-stat .l{font-size:.88rem}
+    .vs-line{padding:24px 22px;margin-top:34px}
+    .vs-line .vs-item .big{font-size:1.7rem}
+
+    /* atos */
+    .ato{padding:28px 24px}
+    .ato h3{font-size:1.3rem}
+    .ato li b{font-size:.92rem}
+    .ato li span{font-size:.84rem}
+
+    /* tech */
+    .tech-card{padding:24px 22px}
+    .tech-card .v{font-size:1.15rem}
+
+    /* steps */
+    .step{padding:0;display:grid;grid-template-columns:auto 1fr;gap:0 16px;align-items:start}
+    .step .num{margin-bottom:0;width:42px;height:42px;font-size:1rem;grid-row:span 2}
+    .step h4{margin-bottom:5px;align-self:center}
+    .step p{font-size:.92rem;grid-column:2}
+    .steps-note{margin-top:30px;font-size:.95rem}
+
+    /* comparativo — keep horizontal scroll but tighten */
+    table{min-width:560px}
+    th,td{padding:13px 13px;font-size:.84rem}
+    thead th.bia{font-size:.92rem}
+    .compare-foot{font-size:1.02rem;margin-top:20px}
+    .table-hint{display:block;text-align:center;font-size:.78rem;color:var(--cinza-texto);margin-bottom:12px}
+
+    /* cases */
+    .case{padding:28px 24px}
+    .case .metric{padding:11px 0}
+    .case .metric .arrow-m{font-size:1rem}
+    .case .metric .ml{font-size:.82rem}
+
+    /* form / cta */
+    .cta-grid{gap:38px}
+    .cta-left h2{font-size:1.75rem}
+    .cta-left p{font-size:1rem}
+    .form-card{padding:28px 22px}
+    .form-card h3{font-size:1.25rem}
+    .field input,.field select{padding:14px 14px;font-size:16px} /* 16px stops iOS zoom */
+    .form-card .btn{padding:16px 18px;font-size:.95rem}
+
+    /* faq */
+    .faq-q{padding:18px 18px;font-size:.98rem}
+    .faq-a p{padding:0 18px 18px;font-size:.93rem}
+
+    /* footer */
+    footer{padding:48px 0 28px}
+    .foot-grid{flex-direction:column;gap:28px;margin-bottom:30px}
+    .foot-cta{width:100%}
+    .foot-cta .btn{width:100%}
+    .foot-bottom{flex-direction:column;gap:6px;font-size:.78rem}
   }
 
-  /* dica tip */
-  .tip-box {
-    background:rgba(26,143,168,.07);
-    border:1px solid rgba(26,143,168,.2);
-    border-radius:10px;
-    padding:12px 14px;
-    font-size:13px; color:var(--sand2);
-    display:flex; gap:10px; align-items:flex-start;
-    margin-top:10px;
-  }
-  .tip-icon { font-size:16px; flex-shrink:0; }
-
-  /* alerta dia */
-  .warn-box {
-    background:rgba(192,57,43,.07);
-    border:1px solid rgba(192,57,43,.25);
-    border-radius:10px;
-    padding:12px 14px;
-    font-size:13px; color:#e8b0a0;
-    display:flex; gap:10px; align-items:flex-start;
+  /* very small phones */
+  @media(max-width:360px){
+    .hero h1{font-size:1.82rem}
+    .phone{width:min(260px,88vw)}
+    .screen{height:440px}
+    .brand{font-size:1.18rem}
   }
 
-  /* ─── RODAPÉ ─── */
-  footer {
-    border-top:1px solid var(--border);
-    padding:30px 24px;
-    text-align:center;
-    font-family:'DM Mono', monospace;
-    font-size:11px; letter-spacing:1.5px;
-    color:var(--muted);
-  }
-
-  /* ─── RESPONSIVE ─── */
-  @media(max-width:540px){
-    .hero { padding:50px 16px 40px; }
-    .finance-grid { padding:0 16px; }
-    .section { padding:0 16px 50px; }
-    .day-header { padding:16px; gap:12px; }
-    .day-body-inner { padding:0 16px 22px; }
-    .day-num { font-size:28px; width:30px; }
-    .hero-meta { gap:10px; }
-  }
+  .mobile-menu{display:none;flex-direction:column;gap:2px;padding:14px 22px 22px;background:#fff;border-bottom:1px solid var(--cinza-ui)}
+  .mobile-menu a{padding:14px 0;font-weight:600;border-bottom:1px solid var(--gelo);font-family:var(--ff-display)}
+  .mobile-menu .btn{margin-top:14px;width:100%}
+  .table-hint{display:none}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">Santa Catarina · Verão · 4 Amigos</div>
-  <h1>Rota <em>Sem Clichê</em><br>Pelo Litoral de SC</h1>
-  <p class="hero-sub">Domingo a Sábado · Jaraguá do Sul → Pomerode → São Chico → Praia Brava → Balneário → Floripa</p>
-  <div class="hero-meta">
-    <div class="meta-pill"><span class="icon">🚗</span> Gol 1.6 · 624 km totais</div>
-    <div class="meta-pill"><span class="icon">👥</span> 4 pessoas</div>
-    <div class="meta-pill"><span class="icon">📅</span> 7 dias · 6 noites</div>
-    <div class="meta-pill"><span class="icon">⛽</span> ~48 litros de gasolina</div>
-  </div>
-</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="klivy-icon" viewBox="0 0 1395 1552">
+  <defs>
+    <linearGradient id="gPlus" x1="-479.93" y1="1104.87" x2="131.03" y2="-301.65" gradientUnits="userSpaceOnUse">
+      <stop offset="0.000" stop-color="#1966fb"></stop>
+      <stop offset="0.143" stop-color="#1a6bfc"></stop>
+      <stop offset="0.286" stop-color="#1675fc"></stop>
+      <stop offset="0.429" stop-color="#1483fc"></stop>
+      <stop offset="0.571" stop-color="#179afc"></stop>
+      <stop offset="0.714" stop-color="#18adfc"></stop>
+      <stop offset="0.857" stop-color="#1dc3fc"></stop>
+      <stop offset="1.000" stop-color="#2ccffd"></stop>
+    </linearGradient>
+    <linearGradient id="gChev" x1="590.90" y1="-70.19" x2="1322.36" y2="-157.07" gradientUnits="userSpaceOnUse">
+      <stop offset="0.000" stop-color="#1098fd"></stop>
+      <stop offset="0.143" stop-color="#2198fd"></stop>
+      <stop offset="0.286" stop-color="#3493fc"></stop>
+      <stop offset="0.429" stop-color="#488efc"></stop>
+      <stop offset="0.571" stop-color="#6887fc"></stop>
+      <stop offset="0.714" stop-color="#7e80fb"></stop>
+      <stop offset="0.857" stop-color="#967cfb"></stop>
+      <stop offset="1.000" stop-color="#b287fb"></stop>
+    </linearGradient>
+  </defs>
+  <path d="M681.19 1.00 C704.43 1.12 775.41 1.48 797.34 1.70 C819.28 1.92 807.47 1.79 812.81 2.31 C818.15 2.83 824.50 3.88 829.38 4.81 C834.25 5.75 838.07 6.81 842.06 7.94 C846.05 9.07 848.76 9.72 853.31 11.59 C857.87 13.46 863.64 15.82 869.41 19.16 C875.17 22.49 883.43 28.32 887.92 31.61 C892.41 34.90 893.52 36.27 896.36 38.92 C899.20 41.57 901.31 43.30 904.94 47.50 C908.57 51.70 914.78 59.48 918.14 64.14 C921.51 68.80 922.77 71.34 925.13 75.44 C927.48 79.54 930.50 85.25 932.25 88.75 C934.00 92.25 934.49 93.36 935.63 96.44 C936.76 99.52 937.79 101.98 939.06 107.22 C940.34 112.45 942.40 122.62 943.28 127.84 C944.16 133.07 944.07 133.21 944.34 138.56 C944.61 143.91 944.91 146.03 944.91 159.94 C944.90 173.84 944.81 206.38 944.30 222.00 C943.78 237.63 943.01 243.21 941.81 253.69 C940.62 264.16 938.84 275.34 937.13 284.86 C935.41 294.38 933.80 301.63 931.50 310.80 C929.20 319.96 925.84 331.68 923.31 339.84 C920.78 348.01 919.04 352.81 916.31 359.78 C913.58 366.75 910.51 373.92 906.94 381.66 C903.37 389.40 899.56 397.47 894.91 406.22 C890.25 414.97 883.84 426.08 879.00 434.17 C874.16 442.26 870.92 447.53 865.88 454.75 C860.83 461.97 854.53 470.11 848.70 477.50 C842.88 484.89 836.82 492.29 830.91 499.09 C825.00 505.90 820.06 511.32 813.25 518.31 C806.44 525.31 797.13 534.48 790.06 541.06 C782.99 547.64 777.69 552.06 770.84 557.78 C764.00 563.50 756.48 569.58 749.00 575.38 C741.52 581.17 742.76 580.71 725.94 592.53 C709.12 604.36 665.46 634.21 648.08 646.33 C630.70 658.45 629.73 659.19 621.64 665.27 C613.55 671.34 606.60 676.85 599.52 682.78 C592.43 688.72 584.35 695.93 579.13 700.88 C573.90 705.82 571.70 708.45 568.19 712.44 C564.68 716.42 560.94 720.98 558.06 724.78 C555.19 728.58 553.14 731.66 550.94 735.22 C548.74 738.77 546.62 742.50 544.86 746.11 C543.10 749.72 541.59 753.34 540.39 756.89 C539.19 760.44 538.32 763.61 537.66 767.39 C536.99 771.17 536.49 776.02 536.41 779.58 C536.32 783.13 536.74 786.01 537.14 788.72 C537.54 791.43 538.10 793.42 538.83 795.84 C539.55 798.27 539.74 799.46 541.50 803.25 C543.26 807.04 546.42 813.90 549.38 818.56 C552.33 823.22 554.74 826.20 559.22 831.22 C563.70 836.24 570.34 843.16 576.25 848.69 C582.16 854.22 587.42 858.67 594.69 864.41 C601.95 870.14 609.30 875.66 619.84 883.11 C630.39 890.56 643.73 899.79 657.97 909.13 C672.20 918.46 693.58 931.60 705.25 939.14 C716.92 946.68 719.89 948.68 728.00 954.36 C736.11 960.04 745.60 966.87 753.91 973.22 C762.21 979.57 769.37 985.20 777.81 992.44 C786.26 999.68 795.96 1008.31 804.58 1016.67 C813.19 1025.03 821.54 1033.64 829.50 1042.59 C837.46 1051.55 844.86 1060.53 852.33 1070.39 C859.80 1080.25 869.02 1093.95 874.31 1101.75 C879.60 1109.55 880.71 1111.60 884.06 1117.22 C887.42 1122.83 890.23 1127.15 894.44 1135.44 C898.65 1143.72 905.47 1158.35 909.31 1166.94 C913.15 1175.52 915.03 1180.56 917.48 1186.94 C919.93 1193.31 921.25 1196.08 924.02 1205.19 C926.78 1214.29 931.55 1230.73 934.06 1241.56 C936.57 1252.40 937.66 1259.70 939.08 1270.20 C940.50 1280.70 941.79 1292.65 942.59 1304.56 C943.40 1316.48 943.73 1324.59 943.91 1341.69 C944.09 1358.79 943.82 1394.58 943.67 1407.17 C943.52 1419.76 943.38 1413.72 943.00 1417.23 C942.62 1420.75 942.48 1422.85 941.38 1428.27 C940.27 1433.68 938.47 1442.90 936.36 1449.70 C934.25 1456.50 931.54 1463.14 928.73 1469.06 C925.92 1474.99 923.20 1479.83 919.50 1485.25 C915.80 1490.67 910.31 1497.32 906.56 1501.56 C902.82 1505.80 901.86 1506.69 897.03 1510.69 C892.20 1514.68 882.35 1522.10 877.58 1525.55 C872.80 1528.99 871.29 1529.68 868.39 1531.36 C865.49 1533.04 863.46 1534.16 860.19 1535.63 C856.91 1537.09 852.81 1538.77 848.75 1540.16 C844.69 1541.54 840.96 1543.06 835.81 1543.94 C830.66 1544.81 830.01 1544.91 817.86 1545.41 C805.71 1545.90 791.74 1546.54 762.92 1546.91 C734.10 1547.28 675.50 1547.54 644.95 1547.63 C614.41 1547.71 595.68 1547.59 579.66 1547.44 C563.63 1547.28 556.66 1547.34 548.81 1546.69 C540.97 1546.03 537.70 1544.78 532.59 1543.50 C527.49 1542.22 522.63 1540.65 518.17 1538.98 C513.71 1537.32 510.40 1535.82 505.83 1533.52 C501.26 1531.21 494.74 1527.54 490.75 1525.16 C486.76 1522.77 485.03 1521.60 481.88 1519.19 C478.72 1516.78 475.08 1513.73 471.84 1510.70 C468.61 1507.67 465.52 1504.49 462.47 1501.00 C459.42 1497.51 455.98 1493.06 453.56 1489.75 C451.14 1486.44 450.13 1484.92 447.94 1481.13 C445.75 1477.33 442.55 1471.28 440.44 1467.00 C438.33 1462.72 436.92 1459.59 435.28 1455.47 C433.64 1451.35 431.88 1446.75 430.59 1442.28 C429.31 1437.81 428.38 1432.98 427.59 1428.66 C426.81 1424.33 426.28 1427.58 425.88 1416.31 C425.47 1405.04 425.37 1402.31 425.19 1361.03 C425.00 1319.76 424.99 1210.78 424.77 1168.66 C424.54 1126.53 424.15 1121.12 423.83 1108.28 C423.50 1095.44 423.41 1095.16 422.81 1091.63 C422.21 1088.09 421.13 1088.40 420.22 1087.09 C419.31 1085.79 418.41 1084.74 417.38 1083.81 C416.34 1082.88 415.50 1082.25 414.00 1081.50 C412.50 1080.75 411.79 1079.77 408.38 1079.31 C404.96 1078.85 433.14 1078.89 393.50 1078.75 C353.86 1078.61 213.28 1078.59 170.56 1078.47 C127.85 1078.35 146.23 1078.30 137.22 1078.02 C128.21 1077.73 122.52 1077.52 116.50 1076.75 C110.48 1075.98 105.47 1074.59 101.13 1073.42 C96.78 1072.26 94.80 1071.58 90.44 1069.75 C86.08 1067.92 79.57 1064.84 74.95 1062.42 C70.34 1060.00 66.60 1057.77 62.77 1055.23 C58.93 1052.70 55.62 1050.25 51.97 1047.19 C48.32 1044.13 43.85 1039.88 40.88 1036.88 C37.90 1033.88 36.75 1032.54 34.13 1029.19 C31.50 1025.83 28.02 1021.22 25.13 1016.75 C22.23 1012.28 19.02 1006.68 16.78 1002.38 C14.54 998.07 13.55 995.96 11.67 990.94 C9.80 985.91 7.00 977.66 5.53 972.22 C4.07 966.78 3.46 982.26 2.88 958.31 C2.29 934.37 2.10 889.55 2.03 828.56 C1.96 767.58 2.33 635.24 2.47 592.41 C2.61 549.57 2.24 578.04 2.88 571.56 C3.51 565.09 4.43 560.14 6.25 553.56 C8.07 546.98 11.77 537.26 13.81 532.09 C15.85 526.93 16.79 525.64 18.50 522.56 C20.21 519.49 21.79 517.00 24.06 513.66 C26.33 510.31 29.56 505.81 32.13 502.50 C34.69 499.19 36.86 496.62 39.44 493.78 C42.02 490.95 44.74 488.17 47.59 485.48 C50.44 482.80 53.49 480.12 56.53 477.67 C59.57 475.22 62.67 472.91 65.81 470.78 C68.95 468.65 70.53 467.38 75.38 464.88 C80.22 462.38 88.91 458.14 94.88 455.78 C100.84 453.42 105.12 452.15 111.17 450.73 C117.22 449.32 119.53 448.03 131.19 447.31 C142.84 446.60 145.85 446.56 181.09 446.44 C216.33 446.32 307.20 446.65 342.63 446.58 C378.05 446.51 382.69 446.24 393.63 446.02 C404.56 445.79 404.89 445.76 408.25 445.25 C411.61 444.74 412.15 443.85 413.78 442.97 C415.42 442.08 416.83 441.03 418.06 439.94 C419.30 438.85 420.25 437.75 421.19 436.44 C422.13 435.13 423.17 435.29 423.69 432.06 C424.21 428.83 424.02 458.74 424.30 417.05 C424.58 375.35 424.97 230.11 425.38 181.88 C425.78 133.64 426.16 138.72 426.75 127.63 C427.34 116.53 428.00 119.50 428.94 115.28 C429.88 111.06 430.94 106.65 432.38 102.31 C433.81 97.98 435.71 93.39 437.53 89.27 C439.35 85.14 441.25 81.34 443.28 77.58 C445.31 73.81 447.20 70.48 449.72 66.67 C452.24 62.87 455.45 58.46 458.42 54.75 C461.40 51.04 464.74 47.38 467.56 44.44 C470.38 41.50 472.25 39.75 475.34 37.13 C478.44 34.50 482.49 31.29 486.13 28.69 C489.76 26.08 493.45 23.67 497.14 21.50 C500.83 19.33 504.54 17.41 508.28 15.69 C512.02 13.97 514.11 13.02 519.59 11.19 C525.08 9.36 534.44 6.23 541.19 4.72 C547.93 3.21 552.26 2.74 560.06 2.13 C567.86 1.51 571.70 1.19 588.00 1.00 C604.30 0.81 642.36 1.00 657.89 1.00 C673.42 1.00 657.95 0.88 681.19 1.00 Z" fill="url(#gPlus)"></path>
+  <path d="M1196.13 339.00 C1219.48 339.11 1292.06 339.31 1313.70 339.66 C1335.34 340.00 1321.79 340.23 1325.97 341.06 C1330.14 341.90 1334.64 343.07 1338.75 344.67 C1342.86 346.28 1346.69 348.43 1350.63 350.69 C1354.56 352.94 1359.25 355.93 1362.34 358.19 C1365.43 360.44 1366.81 361.72 1369.17 364.22 C1371.53 366.72 1374.28 369.93 1376.50 373.19 C1378.72 376.44 1380.73 380.07 1382.50 383.73 C1384.27 387.40 1385.83 391.14 1387.13 395.16 C1388.42 399.17 1389.45 403.13 1390.25 407.81 C1391.05 412.49 1391.76 417.59 1391.94 423.23 C1392.11 428.88 1391.87 435.20 1391.30 441.69 C1390.72 448.18 1389.73 455.44 1388.50 462.19 C1387.27 468.94 1385.91 474.96 1383.94 482.19 C1381.96 489.42 1379.07 498.51 1376.64 505.56 C1374.21 512.61 1372.21 517.98 1369.38 524.50 C1366.54 531.02 1363.71 536.79 1359.61 544.66 C1355.51 552.53 1349.24 564.03 1344.78 571.72 C1340.32 579.41 1336.80 584.89 1332.84 590.78 C1328.89 596.68 1325.79 600.91 1321.03 607.09 C1316.28 613.28 1309.48 621.69 1304.31 627.88 C1299.14 634.06 1295.25 638.50 1290.00 644.22 C1284.75 649.94 1278.65 656.38 1272.81 662.19 C1266.98 667.99 1260.60 673.95 1255.00 679.06 C1249.40 684.18 1253.96 680.80 1239.23 692.88 C1224.51 704.95 1180.28 740.15 1166.67 751.53 C1153.07 762.92 1159.50 758.95 1157.59 761.19 C1155.69 763.42 1155.90 763.55 1155.25 764.94 C1154.60 766.33 1154.02 767.96 1153.72 769.53 C1153.42 771.10 1153.29 772.72 1153.44 774.38 C1153.58 776.03 1153.92 777.73 1154.59 779.47 C1155.27 781.21 1156.48 783.32 1157.50 784.81 C1158.52 786.31 1156.65 784.85 1160.73 788.45 C1164.82 792.05 1167.99 795.10 1182.02 806.42 C1196.04 817.74 1231.30 845.36 1244.91 856.38 C1258.51 867.39 1257.80 867.16 1263.63 872.50 C1269.45 877.84 1274.51 882.92 1279.88 888.44 C1285.24 893.96 1290.86 900.03 1295.84 905.61 C1300.82 911.19 1305.43 916.61 1309.75 921.94 C1314.07 927.26 1317.64 931.87 1321.78 937.56 C1325.92 943.25 1330.48 949.84 1334.58 956.08 C1338.67 962.32 1342.82 968.89 1346.34 975.02 C1349.87 981.14 1352.39 986.11 1355.72 992.83 C1359.05 999.54 1363.14 1008.02 1366.31 1015.31 C1369.48 1022.60 1372.25 1029.62 1374.75 1036.56 C1377.25 1043.50 1379.53 1050.84 1381.31 1056.95 C1383.10 1063.06 1384.21 1067.33 1385.45 1073.22 C1386.70 1079.11 1387.82 1085.45 1388.80 1092.28 C1389.78 1099.11 1390.74 1107.68 1391.33 1114.22 C1391.91 1120.76 1392.26 1126.78 1392.30 1131.53 C1392.34 1136.29 1392.10 1138.80 1391.56 1142.75 C1391.02 1146.70 1390.42 1150.45 1389.06 1155.25 C1387.70 1160.05 1385.47 1166.79 1383.41 1171.58 C1381.34 1176.37 1378.77 1180.66 1376.66 1184.00 C1374.55 1187.34 1373.64 1188.69 1370.75 1191.59 C1367.86 1194.50 1362.75 1198.76 1359.31 1201.44 C1355.88 1204.12 1353.10 1205.94 1350.13 1207.69 C1347.15 1209.44 1344.54 1210.72 1341.44 1211.94 C1338.34 1213.15 1335.21 1214.08 1331.53 1214.97 C1327.85 1215.85 1325.73 1216.68 1319.38 1217.25 C1313.02 1217.82 1309.81 1218.08 1293.41 1218.38 C1277.00 1218.67 1250.98 1218.97 1220.94 1219.00 C1190.90 1219.03 1133.43 1218.68 1113.17 1218.53 C1092.91 1218.39 1104.31 1218.52 1099.38 1218.13 C1094.44 1217.73 1089.03 1217.13 1083.58 1216.16 C1078.13 1215.18 1072.38 1213.96 1066.66 1212.28 C1060.93 1210.60 1055.03 1208.60 1049.25 1206.06 C1043.47 1203.53 1037.58 1200.45 1031.98 1197.06 C1026.39 1193.67 1020.15 1189.22 1015.67 1185.73 C1011.20 1182.24 1008.60 1179.52 1005.13 1176.13 C1001.65 1172.73 997.63 1168.44 994.81 1165.34 C992.00 1162.25 990.73 1160.79 988.25 1157.56 C985.77 1154.34 985.17 1153.89 979.91 1146.00 C974.64 1138.11 967.92 1128.68 956.66 1110.22 C945.39 1091.76 921.76 1050.71 912.31 1035.25 C902.87 1019.79 904.47 1023.62 899.98 1017.44 C895.50 1011.25 891.01 1005.10 885.41 998.14 C879.80 991.18 873.63 983.73 866.38 975.69 C859.12 967.64 861.46 968.83 841.88 949.88 C822.29 930.92 767.10 879.28 748.89 861.97 C730.68 844.66 737.92 851.44 732.59 846.00 C727.27 840.56 721.28 834.42 716.94 829.31 C712.60 824.21 709.52 819.77 706.56 815.38 C703.60 810.98 701.48 807.57 699.19 802.94 C696.90 798.30 694.13 791.13 692.81 787.56 C691.50 784.00 691.71 783.79 691.31 781.56 C690.92 779.34 690.56 776.63 690.44 774.22 C690.31 771.81 690.40 769.26 690.56 767.13 C690.72 764.99 690.47 765.02 691.41 761.41 C692.34 757.80 694.10 750.67 696.16 745.47 C698.21 740.27 700.66 735.41 703.75 730.19 C706.84 724.96 710.89 719.16 714.72 714.11 C718.55 709.06 722.14 704.96 726.72 699.91 C731.30 694.86 722.89 701.66 742.19 683.81 C761.48 665.96 822.15 611.60 842.48 592.81 C862.82 574.02 857.45 578.13 864.19 571.06 C870.93 564.00 877.26 557.15 882.94 550.44 C888.61 543.73 893.58 537.12 898.25 530.81 C902.92 524.51 906.70 519.12 910.95 512.61 C915.21 506.10 916.73 503.70 923.80 491.77 C930.87 479.83 946.17 453.01 953.38 440.98 C960.58 428.96 962.20 426.52 967.02 419.61 C971.83 412.70 976.94 405.69 982.25 399.50 C987.56 393.31 993.49 387.42 998.89 382.48 C1004.29 377.55 1009.24 373.70 1014.63 369.88 C1020.01 366.05 1025.61 362.61 1031.19 359.56 C1036.76 356.52 1042.37 353.88 1048.06 351.59 C1053.76 349.31 1059.80 347.39 1065.36 345.88 C1070.91 344.36 1074.62 343.65 1081.39 342.50 C1088.16 341.35 1090.63 339.58 1106.00 339.00 C1121.37 338.42 1158.57 339.00 1173.59 339.00 C1188.61 339.00 1172.77 338.89 1196.13 339.00 Z" fill="url(#gChev)"></path>
+</symbol></svg>
 
-<!-- ALERTA ORÇAMENTO -->
-<div style="max-width:780px; margin:28px auto 0; padding:0 24px;">
-  <div class="budget-alert">
-    <div class="icon-big">⚠️</div>
-    <div>
-      <strong>R$ 1.200 é apertado — recomendo R$ 1.400 a R$ 1.500 por pessoa</strong>
-      <p>Fiz as contas: gasolina (R$ 76), hospedagem Airbnb dividida (R$ 360), alimentação mix padaria + restaurante (R$ 525) e as melhores atividades selecionadas (R$ 267) chegam em <strong>~R$ 1.308/pessoa</strong>. Com R$ 1.200 você cobre, mas sem margem — qualquer gasto extra (estacionamento, sorvete, entrada de museu) fura o orçamento. <strong>Solução:</strong> Airbnb com os 4 no mesmo apartamento de 2 quartos (~R$ 220-250/noite total) e café da manhã feito em casa = a rota funciona dentro de R$ 1.200 com disciplina. Mas R$ 1.400 é o número confortável.</p>
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="brand"><svg class="ico" viewBox="0 0 1395 1552"><use href="#klivy-icon"/></svg>Klivy</a>
+    <nav class="nav-links">
+      <a href="#bia">A Bia</a>
+      <a href="#atos">Como funciona</a>
+      <a href="#tech">Diferenciais</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://wa.me/5547984226825?text=Ol%C3%A1!%20Quero%20falar%20com%20um%20consultor%20sobre%20a%20Bia." target="_blank" rel="noopener" class="btn btn-ghost">Falar com consultor</a>
+      <a href="#form" class="btn btn-primary">Conhecer a Bia</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
-</div>
-
-<!-- RESUMO FINANCEIRO -->
-<div style="max-width:780px; margin:20px auto 0; padding:0 24px 10px;">
-  <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:12px;">
-    Resumo financeiro por pessoa
-    <span style="flex:1; height:1px; background:var(--border); display:block;"></span>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#bia">A Bia</a>
+    <a href="#atos">Como funciona</a>
+    <a href="#tech">Diferenciais</a>
+    <a href="#resultados">Resultados</a>
+    <a href="#faq">Dúvidas</a>
+    <a href="#form" class="btn btn-primary">Conhecer a Bia</a>
   </div>
-</div>
-<div class="finance-grid">
-  <div class="fin-card">
-    <div class="fin-label">Gasolina total</div>
-    <div class="fin-value">R$ 76</div>
-    <div class="fin-desc">624 km · 48 L · média R$ 6,30/L</div>
-  </div>
-  <div class="fin-card">
-    <div class="fin-label">Hospedagem</div>
-    <div class="fin-value">R$ 360</div>
-    <div class="fin-desc">6 noites · Airbnb 4 pax · ~R$ 240/noite</div>
-  </div>
-  <div class="fin-card">
-    <div class="fin-label">Alimentação</div>
-    <div class="fin-value">R$ 525</div>
-    <div class="fin-desc">7 dias · ~R$ 75/dia (mix padaria + rest.)</div>
-  </div>
-  <div class="fin-card highlight">
-    <div class="fin-label">Atividades</div>
-    <div class="fin-value teal">R$ 267</div>
-    <div class="fin-desc">Nugali, Unipraias, Campeche, Fortalezas</div>
-  </div>
-  <div class="fin-card">
-    <div class="fin-label">Fundo reserva</div>
-    <div class="fin-value">R$ 80</div>
-    <div class="fin-desc">Estacion., gorjetas, imprevistos</div>
-  </div>
-  <div class="fin-card warn">
-    <div class="fin-label">TOTAL estimado</div>
-    <div class="fin-value red">R$ 1.308</div>
-    <div class="fin-desc">Recomendado trazer R$ 1.400–1.500</div>
-  </div>
-</div>
+</header>
 
-<!-- DIAS -->
-<div class="section" style="padding-top:10px;">
-  <div class="section-title">Roteiro dia a dia</div>
-
-  <div class="days-container" id="days">
-
-    <!-- ─── DIA 0 — DOMINGO ─── -->
-    <div class="day-card" id="day0">
-      <div class="day-header" onclick="toggle('day0')">
-        <div class="day-num">0</div>
-        <div class="day-info">
-          <div class="day-label">Domingo · Chegada</div>
-          <div class="day-title">Jaraguá do Sul<br><small style="font-size:16px; opacity:.7">+ Pomerode</small></div>
-          <div class="day-subtitle">Amigos chegam de São Paulo · Aterrissagem suave, arquitetura germânica</div>
-        </div>
-        <div class="day-meta">
-          <div class="day-budget-pill">~R$ 165/pessoa</div>
-          <div class="day-label" style="font-size:10px;">35 km · R$ 4/pax</div>
-        </div>
-        <div class="chevron">▼</div>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">A inteligência da Klivy para clínicas</span>
+      <h1>A clínica <span class="grad-text">opera sozinha.</span><br>Você apenas conduz.</h1>
+      <p class="lead">A <b>Bia</b> é a IA da Klivy que atende, agenda, cobra via Pix e organiza sua clínica — 24 horas por dia, dentro do WhatsApp e no tom da sua clínica. Da recepção à gestão.</p>
+      <div class="hero-ctas">
+        <a href="#form" class="btn btn-primary">Quero conhecer a Bia
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="https://wa.me/5547984226825?text=Ol%C3%A1!%20Quero%20falar%20com%20um%20consultor%20sobre%20a%20Bia." target="_blank" rel="noopener" class="btn btn-ghost">Falar com consultor</a>
       </div>
-      <div class="day-body" id="day0-body">
-        <div class="day-body-inner">
-
-          <div class="day-section">
-            <div class="day-section-title">☀️ Manhã — Jaraguá do Sul</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">☕</div>
-                <div>
-                  <div class="activity-name">Café Colonial Strudel Haus</div>
-                  <div class="activity-desc">Café colonial farto: strudel recém-assado, salsicha bock, chimias caseiras. Abre domingo 11h30 — perfeito pra quem chega de SP de manhã. Rua Tifa Aurora, Rio Cerro II.</div>
-                </div>
-                <div class="activity-cost">~R$ 45</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🛋️</div>
-                <div>
-                  <div class="activity-name">Quiero Café (alternativa urbana)</div>
-                  <div class="activity-desc">Ambiente descolado, espresso V60, drinks, pratos com salmão. Mais cosmopolita, ideal se o grupo quiser algo mais "atual". Centro.</div>
-                </div>
-                <div class="activity-cost">~R$ 40</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🌅 Tarde — Pomerode (35 km)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🍫</div>
-                <div>
-                  <div class="activity-name">Nugali Chocolates — Tour Bean-to-Bar</div>
-                  <div class="activity-desc">Pioneira do chocolate fino no Brasil. Tour imersivo pelo processo completo de produção, degustações e loja. Um "ah, eu não sabia que chocolate era assim" garantido.</div>
-                </div>
-                <div class="activity-cost">~R$ 35</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🍺</div>
-                <div>
-                  <div class="activity-name">Cervejaria Schornstein</div>
-                  <div class="activity-desc">Fabricada pela Lei de Pureza Alemã (1516). Tour + degustação. Ótimo contraponto cultural com a herança germânica da região.</div>
-                </div>
-                <div class="activity-cost">~R$ 20</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🏘️</div>
-                <div>
-                  <div class="activity-name">Rota do Enxaimel</div>
-                  <div class="activity-desc">Maior acervo de construções enxaimel fora da Alemanha. Passeio a pé gratuito pelas ruas da cidade — foto obrigatória em cada esquina. Inusitado pra quem nunca veio ao sul.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🍻 Noite — Biergarten Pomerânia</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🏡</div>
-                <div>
-                  <div class="activity-name">Biergarten Pomerânia</div>
-                  <div class="activity-desc">Finaliza o dia com chopps gelados em contexto histórico autêntico. Atmosfera de interior serrano, conversa, sem barulho, sem balada — exatamente o vibe de quem não quer agito no primeiro dia.</div>
-                </div>
-                <div class="activity-cost">~R$ 40</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🛏️ Hospedagem</div>
-            <div class="hotel-block">
-              <div class="hotel-icon">🏠</div>
-              <div>
-                <div class="hotel-name">Airbnb / Pousada em Pomerode</div>
-                <div class="hotel-detail">Opção A: pernoitar em Pomerode (repouso tranquilo, cidade silenciosa). Opção B: descer para BC ainda nesta noite se o grupo tiver energia.</div>
-              </div>
-              <div class="hotel-cost">~R$ 55/pax</div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💰 Orçamento do dia</div>
-            <div class="day-budget-table">
-              <div class="dbt-row"><span class="dbt-label">Gasolina (35 km)</span><span class="dbt-value">R$ 4</span></div>
-              <div class="dbt-row"><span class="dbt-label">Café + alimentação</span><span class="dbt-value">R$ 55</span></div>
-              <div class="dbt-row"><span class="dbt-label">Atividades (Nugali + Schornstein + Biergarten)</span><span class="dbt-value">R$ 95</span></div>
-              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 55</span></div>
-              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 209</span></div>
-            </div>
-            <div class="tip-box" style="margin-top:10px;">
-              <span class="tip-icon">💡</span>
-              <span>Se quiser economizar: pule a cervejaria (economiza R$ 20) e substitua o café colonial (R$ 45) por uma padaria simples (~R$ 15). Chega em ~R$ 155/pessoa.</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div><!-- /day0 -->
-
-    <!-- ─── DIA 1 — SEGUNDA ─── -->
-    <div class="day-card" id="day1">
-      <div class="day-header" onclick="toggle('day1')">
-        <div class="day-num">1</div>
-        <div class="day-info">
-          <div class="day-label">Segunda-feira · O Dia Histórico</div>
-          <div class="day-title">São Francisco do Sul</div>
-          <div class="day-subtitle">3ª cidade mais antiga do Brasil · Centro tombado · Prainha + pôr do sol no Iate Clube</div>
-        </div>
-        <div class="day-meta">
-          <div class="day-budget-pill">~R$ 200/pessoa</div>
-          <div class="day-label" style="font-size:10px;">90 km · R$ 11/pax</div>
-        </div>
-        <div class="chevron">▼</div>
-      </div>
-      <div class="day-body" id="day1-body">
-        <div class="day-body-inner">
-
-          <div class="day-section">
-            <div class="day-section-title">🏛️ Manhã — Centro Histórico (a pé)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">⛪</div>
-                <div>
-                  <div class="activity-name">Igreja Matriz Nossa Senhora da Graça</div>
-                  <div class="activity-desc">Fundação original de 1553. Argamassa colonial feita com óleo de baleia, areia e conchas trituradas. Museu de Arte Sacra interno. Ponto de partida perfeito da rota pedonal.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🏺</div>
-                <div>
-                  <div class="activity-name">Museu Histórico de São Francisco do Sul</div>
-                  <div class="activity-desc">Na antiga Câmara e Cadeia Pública colonial. Documentos, plantas do antigo porto, utensílios do Brasil Colônia e Império. Contexto histórico real, sem enrolação.</div>
-                </div>
-                <div class="activity-cost">~R$ 10</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">⚓</div>
-                <div>
-                  <div class="activity-name">Museu Nacional do Mar</div>
-                  <div class="activity-desc">Um dos maiores acervos navais do país — embarcações tradicionais brasileiras do século XIX. Confirmar abertura antes. O entorno do Mercado Público oferece vista da Baía Babitonga.</div>
-                </div>
-                <div class="activity-cost">~R$ 10</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🍽️ Almoço</div>
-            <div class="meal-grid">
-              <div class="meal-card almoco">
-                <div class="meal-type">Almoço</div>
-                <div class="meal-name">Restaurante Container</div>
-                <div class="meal-detail">Hambúrgueres chapeados e buffet completo. Rústico-industrial dentro do centro histórico colonial. Preço justo, volume farto.</div>
-                <div class="meal-cost">~R$ 40</div>
-              </div>
-              <div class="meal-card almoco">
-                <div class="meal-type">Almoço</div>
-                <div class="meal-name">A Ver Navios Petisqueira</div>
-                <div class="meal-detail">Rodízio de frutos do mar e petiscos catarinenses. X-A Ver Navios com hambúrguer de peixe. Informal, frente para o mar.</div>
-                <div class="meal-cost">~R$ 55</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🏄 Tarde — Prainha da Saudade</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🌊</div>
-                <div>
-                  <div class="activity-name">Praia da Saudade (Prainha)</div>
-                  <div class="activity-desc">700 metros de orla com calçadão vibrante. Epicentro do surf no litoral norte de SC. O contraste com o centro histórico do século XVI — tudo a 10 minutos de carro — é o que torna São Chico única.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🍹</div>
-                <div>
-                  <div class="activity-name">Calle del Mar — Praia Grande</div>
-                  <div class="activity-desc">Street food litorânea de outro nível: Hambúrguer de Siri empanado em panko, Burrito de Peixe, Fish & Chips. Drinks autorais com insumos amazônicos: Pindorama (cachaça amburana + maracujá + aquafaba), Sibauma (rum spiced + aperitivo de caju + mate).</div>
-                </div>
-                <div class="activity-cost">~R$ 55</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🌇 Pôr do Sol — Pier 65 no Iate Clube (Capri)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🛥️</div>
-                <div>
-                  <div class="activity-name">Pier 65 — Iate Clube Praia do Capri</div>
-                  <div class="activity-desc">Alta gastronomia frente à Baía Babitonga. Congrio em Crosta de Pistache com risoto de limão siciliano, Entrecot com Fonduta de Queijos. Drinks refinados, vista panorâmica serena para o mar calmo. Sem pista de dança, sem barulho. <strong>O melhor pôr do sol de São Chico.</strong></div>
-                </div>
-                <div class="activity-cost">~R$ 70</div>
-              </div>
-            </div>
-            <div class="tip-box">
-              <span class="tip-icon">💡</span>
-              <span><strong>Budget tip:</strong> Se o grupo estiver controlando gastos, pule o Pier 65 (economiza R$ 70) e substitua por drinks no próprio Calle del Mar ao entardecer. Você perde o iate clube mas mantém o pôr do sol.</span>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🛏️ Hospedagem</div>
-            <div class="hotel-block">
-              <div class="hotel-icon">🏠</div>
-              <div>
-                <div class="hotel-name">Airbnb em São Francisco do Sul ou descer para BC</div>
-                <div class="hotel-detail">Opção econômica: já ir para BC à noite (poupa uma diária) e chegar descansado para a terça. São Francisco tem opções baratas de pousada.</div>
-              </div>
-              <div class="hotel-cost">~R$ 55/pax</div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💰 Orçamento do dia</div>
-            <div class="day-budget-table">
-              <div class="dbt-row"><span class="dbt-label">Gasolina (90 km)</span><span class="dbt-value">R$ 11</span></div>
-              <div class="dbt-row"><span class="dbt-label">Museus + entrada</span><span class="dbt-value">R$ 20</span></div>
-              <div class="dbt-row"><span class="dbt-label">Almoço (Container ou A Ver Navios)</span><span class="dbt-value">R$ 45</span></div>
-              <div class="dbt-row"><span class="dbt-label">Calle del Mar (lanche + drinks)</span><span class="dbt-value">R$ 55</span></div>
-              <div class="dbt-row"><span class="dbt-label">Pier 65 (opcional, pôr do sol)</span><span class="dbt-value">R$ 70</span></div>
-              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 55</span></div>
-              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA (com Pier 65)</span><span class="dbt-value total-v">≈ R$ 256</span></div>
-              <div class="dbt-row"><span class="dbt-label">TOTAL / PESSOA (sem Pier 65)</span><span class="dbt-value" style="color:#5abf8a;">≈ R$ 186</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div><!-- /day1 -->
-
-    <!-- ─── DIA 2 — TERÇA ─── -->
-    <div class="day-card" id="day2">
-      <div class="day-header" onclick="toggle('day2')">
-        <div class="day-num">2</div>
-        <div class="day-info">
-          <div class="day-label">Terça-feira · Visual Impact</div>
-          <div class="day-title">Praia Brava + Balneário Camboriú</div>
-          <div class="day-subtitle">Chegada na AMFRI · Unipraias · Uvva Wine Bar · Big Bär Rooftop</div>
-        </div>
-        <div class="day-meta">
-          <div class="day-budget-pill">~R$ 280/pessoa</div>
-          <div class="day-label" style="font-size:10px;">118 km · R$ 14/pax</div>
-        </div>
-        <div class="chevron">▼</div>
-      </div>
-      <div class="day-body" id="day2-body">
-        <div class="day-body-inner">
-
-          <div class="day-section">
-            <div class="day-section-title">🌊 Tarde — Praia Brava (Itajaí)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🏖️</div>
-                <div>
-                  <div class="activity-name">Hike Brava Beach Club</div>
-                  <div class="activity-desc">Vibe havaiana, pés na areia, música ao vivo com curadoria ambiente. Almoço ou tarde livre na beira-mar mais valorizada da América do Sul. Funciona de quarta a domingo — verificar se terça tem operação plena.</div>
-                </div>
-                <div class="activity-cost">~R$ 55</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🚡 Balneário Camboriú — Unipraias</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🚟</div>
-                <div>
-                  <div class="activity-name">Parque Unipraias — Bondinho Aéreo</div>
-                  <div class="activity-desc">Liga Barra Sul (centro urbano) → Mata Atlântica (240m de altitude, vista 360°) → Laranjeiras (baía de águas calmas). Impacto visual máximo sem esforço físico. O mirante de Mata Atlântica entrega a melhor fotografia da viagem. <strong>Reserve antecipado em temporada.</strong></div>
-                </div>
-                <div class="activity-cost">~R$ 87</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🌲</div>
-                <div>
-                  <div class="activity-name">Deck do Pontal Norte</div>
-                  <div class="activity-desc">Passarela de madeira sinuosa debruçada sobre o oceano com mata nativa. Vista lateral da orla monumental de BC. Completamente gratuito, dura uns 40 minutos. Impactante.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🍷 Noite — Uvva Wine Bar (Praia Brava)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🍷</div>
-                <div>
-                  <div class="activity-name">Uvva Wine Bar</div>
-                  <div class="activity-desc">16 torneiras de vinho em sistema self-service. Arquitetura como obra de arte, petiscos de exceção, altamente instagramável. O espaço prova que dá pra ter uma noite vibrante sem pista de dança. <strong>Rua Delfim Mário de P. Peixoto, 391 · Ter-Sex 18h–00h.</strong></div>
-                </div>
-                <div class="activity-cost">~R$ 80</div>
-              </div>
-            </div>
-            <div class="tip-box">
-              <span class="tip-icon">🍷</span>
-              <span>No Uvva, o self-service de vinho permite controlar exatamente quanto cada um bebe e gasta. É fácil ficar R$ 50 ou R$ 120 — depende da vontade. Considere isso no planejamento.</span>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🛏️ Hospedagem — Base: Praia Brava ou BC</div>
-            <div class="hotel-block">
-              <div class="hotel-icon">🏠</div>
-              <div>
-                <div class="hotel-name">Airbnb 2 quartos — Praia Brava ou BC</div>
-                <div class="hotel-detail">Base para 2 noites (terça e quarta). Praia Brava tem Airbnbs razoáveis. Dividindo 4 pessoas, sai bem. Cozinha para café da manhã = economia real de R$ 15–20 por pessoa por dia.</div>
-              </div>
-              <div class="hotel-cost">~R$ 60/pax</div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💰 Orçamento do dia</div>
-            <div class="day-budget-table">
-              <div class="dbt-row"><span class="dbt-label">Gasolina (118 km)</span><span class="dbt-value">R$ 14</span></div>
-              <div class="dbt-row"><span class="dbt-label">Hike Beach Club (almoço/tarde)</span><span class="dbt-value">R$ 55</span></div>
-              <div class="dbt-row"><span class="dbt-label">Unipraias</span><span class="dbt-value">R$ 87</span></div>
-              <div class="dbt-row"><span class="dbt-label">Uvva Wine Bar</span><span class="dbt-value">R$ 80</span></div>
-              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 60</span></div>
-              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 296</span></div>
-            </div>
-            <div class="warn-box" style="margin-top:10px;">
-              <span>⚠️</span>
-              <span>Este é o dia mais caro da viagem. Se necessário: troque o Hike Beach Club por praia pública livre (~R$ 30 de lanche), economizando R$ 25.</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div><!-- /day2 -->
-
-    <!-- ─── DIA 3 — QUARTA ─── -->
-    <div class="day-card" id="day3">
-      <div class="day-header" onclick="toggle('day3')">
-        <div class="day-num">3</div>
-        <div class="day-info">
-          <div class="day-label">Quarta-feira · Natureza + Rooftop</div>
-          <div class="day-title">BC + Itapema</div>
-          <div class="day-subtitle">Interpraias · Praia do Estaleiro · Alma Gastro · Big Bär ou Tetto Rooftop</div>
-        </div>
-        <div class="day-meta">
-          <div class="day-budget-pill">~R$ 195/pessoa</div>
-          <div class="day-label" style="font-size:10px;">40 km · R$ 5/pax</div>
-        </div>
-        <div class="chevron">▼</div>
-      </div>
-      <div class="day-body" id="day3-body">
-        <div class="day-body-inner">
-
-          <div class="day-section">
-            <div class="day-section-title">🌿 Manhã — Rodovia Interpraias</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🏞️</div>
-                <div>
-                  <div class="activity-name">Rodovia Interpraias + Praia do Estaleiro</div>
-                  <div class="activity-desc">Corredor ecológico que serpenteia pelos morros ligando Laranjeiras → Taquaras → Estaleiro → Estaleirinho. A Praia do Estaleiro é rústica, com pedras, mata densa e mar bravo — o oposto da Avenida Brasil. Completamente gratuito e o antídoto perfeito para a densidade de BC.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🎡</div>
-                <div>
-                  <div class="activity-name">Big Bär Rooftop (pré-visita / fotos diurnas)</div>
-                  <div class="activity-desc">Ao lado da roda gigante FG Big Wheel na Estrada da Rainha. Espelhos d'água, almofadas, skyline de BC pela metade da tarde. Reservar para a noite.</div>
-                </div>
-                <div class="activity-cost">~R$ 20 (consumação)</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🍽️ Almoço — Itapema (15 km de BC)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🌄</div>
-                <div>
-                  <div class="activity-name">Indaiá Restaurante (no alto do morro)</div>
-                  <div class="activity-desc">Arquitetura envidraçada com vista panorâmica da Baía de Porto Belo e da orla de Itapema. Menu degustação e fondue premium. Um almoço com vista dificilmente superável. Se o grupo for selecionar 1 restaurante "especial" fora de Floripa, é este.</div>
-                </div>
-                <div class="activity-cost">~R$ 75</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🌃 Noite — Rooftop em BC</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🏙️</div>
-                <div>
-                  <div class="activity-name">Big Bär Rooftop</div>
-                  <div class="activity-desc">Sofisticado, com espelhos d'água e almofadas. Skyline brutal de BC ao entardecer. Foco em coquetéis criativos e conversa. Menos pomposo que o Tetto, mais intimista. Ideal para grupos pequenos.</div>
-                </div>
-                <div class="activity-cost">~R$ 60</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">✨</div>
-                <div>
-                  <div class="activity-name">Tetto Rooftop (alternativa)</div>
-                  <div class="activity-desc">33º andar, parapeito de vidro infinito, painel LED de 130m². Mais tecnológico e grandioso. Se o grupo quiser a experiência "wow" de altura, é aqui. Funciona de quarta a domingo.</div>
-                </div>
-                <div class="activity-cost">~R$ 60</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🍣</div>
-                <div>
-                  <div class="activity-name">Izakaya Brava</div>
-                  <div class="activity-desc">Bar sensorial japonês à beira-mar. Decoração de vanguarda, culinária oriental de altíssima qualidade, clima para conversa sem abafar. Quarta a sábado, 19h–23h.</div>
-                </div>
-                <div class="activity-cost">~R$ 65</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💰 Orçamento do dia</div>
-            <div class="day-budget-table">
-              <div class="dbt-row"><span class="dbt-label">Gasolina (40 km)</span><span class="dbt-value">R$ 5</span></div>
-              <div class="dbt-row"><span class="dbt-label">Almoço Indaiá</span><span class="dbt-value">R$ 75</span></div>
-              <div class="dbt-row"><span class="dbt-label">Rooftop (Big Bär ou Tetto)</span><span class="dbt-value">R$ 60</span></div>
-              <div class="dbt-row"><span class="dbt-label">Hospedagem (2ª noite no mesmo Airbnb)</span><span class="dbt-value">R$ 60</span></div>
-              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 200</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div><!-- /day3 -->
-
-    <!-- ─── DIA 4 — QUINTA ─── -->
-    <div class="day-card" id="day4">
-      <div class="day-header" onclick="toggle('day4')">
-        <div class="day-num">4</div>
-        <div class="day-info">
-          <div class="day-label">Quinta-feira · A Ilha da Magia chega</div>
-          <div class="day-title">Florianópolis — Dia Histórico</div>
-          <div class="day-subtitle">Centro · Mercado Público · Fortaleza 1740 · Santo Antônio de Lisboa · Seu Antônio</div>
-        </div>
-        <div class="day-meta">
-          <div class="day-budget-pill">~R$ 220/pessoa</div>
-          <div class="day-label" style="font-size:10px;">80 km · R$ 10/pax</div>
-        </div>
-        <div class="chevron">▼</div>
-      </div>
-      <div class="day-body" id="day4-body">
-        <div class="day-body-inner">
-
-          <div class="day-section">
-            <div class="day-section-title">🏛️ Manhã — Centro Histórico de Floripa (a pé)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🌳</div>
-                <div>
-                  <div class="activity-name">Praça XV de Novembro — Figueira Centenária (1871)</div>
-                  <div class="activity-desc">Epicentro espiritual da cidade. Tradição ilhoa: dar voltas ao redor da figueira para atrair casamento ou garantir o retorno à ilha. Frente para a Catedral Metropolitana.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🏛️</div>
-                <div>
-                  <div class="activity-name">Palácio Cruz e Sousa</div>
-                  <div class="activity-desc">Construído no século XVIII como sobrado açoriano, reformado em 1877 para palácio neoclássico — hospedou D. Pedro I e D. Pedro II. Assoalhos em marchetaria geométrica, claraboias. Museu Histórico de SC.</div>
-                </div>
-                <div class="activity-cost">~R$ 10</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🛒</div>
-                <div>
-                  <div class="activity-name">Mercado Público Municipal</div>
-                  <div class="activity-desc">120+ anos de funcionamento. Não é peixaria — é onde intelectuais, políticos, turistas e pescadores dividem a mesma mesa nos bares. A alma viva de Floripa. Cobertura nova inspirada em renda de bilro açoriana.</div>
-                </div>
-                <div class="activity-cost free">grátis (comida à parte)</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🌉</div>
-                <div>
-                  <div class="activity-name">Ponte Hercílio Luz (a pé)</div>
-                  <div class="activity-desc">Inaugurada em 1926, restaurada recentemente. 800m de estrutura pênsil com 5.000 toneladas de aço. Cruzar a pé oferece as melhores fotos da viagem — vistas das Baías Norte e Sul simultaneamente.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💡 Almoço no Mercado</div>
-            <div class="meal-grid">
-              <div class="meal-card almoco">
-                <div class="meal-type">Almoço</div>
-                <div class="meal-name">Bars do Mercado Público</div>
-                <div class="meal-detail">Moqueca, caldo de berbigão, prato feito com linguiça. Comer dentro do Mercado é a experiência correta em Floripa — não é turístico, é genuíno.</div>
-                <div class="meal-cost">~R$ 35</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">⚔️ Tarde — Fortaleza de São José da Ponta Grossa</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🏰</div>
-                <div>
-                  <div class="activity-name">Fortaleza de São José da Ponta Grossa (1740)</div>
-                  <div class="activity-desc">Construída por ordem do Brigadeiro José da Silva Paes para defender a Baía Norte de espanhóis e corsários. Baterias de canhões alinhadas para o horizonte. Dramática, intelectualmente pesada, completamente diferente de uma praia. Fica do lado da Praia do Forte (dá pra tomar banho depois).</div>
-                </div>
-                <div class="activity-cost">~R$ 15</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🌅 Pôr do Sol — Santo Antônio de Lisboa</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🦪</div>
-                <div>
-                  <div class="activity-name">Santo Antônio de Lisboa — Vilarejo Açoriano</div>
-                  <div class="activity-desc">Casarios baixos coloridos, ruas de pedra irregular, Igreja Nossa Senhora das Necessidades. Um dos maiores polos de maricultura do Brasil — ostras frescas direto do mar a R$ 15–20 a dúzia nas barraquinhas.</div>
-                </div>
-                <div class="activity-cost">~R$ 20</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">🍽️</div>
-                <div>
-                  <div class="activity-name">Restaurante Seu Antônio</div>
-                  <div class="activity-desc">Orientado para o ocaso da Baía Norte. DJ e banda ao vivo em frequência de lounge — estimula conversa, não ensurdece. Culinária com insumos litorâneos locais e técnicas modernas. <strong>O "lugar pika" de Floripa.</strong> Atrai artistas e formadores de opinião. Reserva necessária.</div>
-                </div>
-                <div class="activity-cost">~R$ 90</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🛏️ Hospedagem — Floripa (2 noites)</div>
-            <div class="hotel-block">
-              <div class="hotel-icon">🏠</div>
-              <div>
-                <div class="hotel-name">Airbnb em Florianópolis — Norte ou Centro</div>
-                <div class="hotel-detail">Base para quinta e sexta. Região da Lagoa da Conceição ou Jurerê Internacional tem boas opções. Norte facilita o acesso à Fortaleza e a Santo Antônio. Dividir 4 pessoas em 2 quartos.</div>
-              </div>
-              <div class="hotel-cost">~R$ 65/pax</div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💰 Orçamento do dia</div>
-            <div class="day-budget-table">
-              <div class="dbt-row"><span class="dbt-label">Gasolina (80 km)</span><span class="dbt-value">R$ 10</span></div>
-              <div class="dbt-row"><span class="dbt-label">Museus / Fortaleza</span><span class="dbt-value">R$ 25</span></div>
-              <div class="dbt-row"><span class="dbt-label">Almoço Mercado</span><span class="dbt-value">R$ 35</span></div>
-              <div class="dbt-row"><span class="dbt-label">Ostras + Seu Antônio (jantar/sunset)</span><span class="dbt-value">R$ 110</span></div>
-              <div class="dbt-row"><span class="dbt-label">Hospedagem</span><span class="dbt-value">R$ 65</span></div>
-              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v">≈ R$ 245</span></div>
-            </div>
-            <div class="tip-box">
-              <span class="tip-icon">💡</span>
-              <span>Se precisar cortar: troque o Seu Antônio (R$ 90) por um jantar simples em padaria (~R$ 25) e vá apenas para as ostras nas barraquinhas. Economiza ~R$ 65.</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div><!-- /day4 -->
-
-    <!-- ─── DIA 5 — SEXTA ─── -->
-    <div class="day-card" id="day5">
-      <div class="day-header" onclick="toggle('day5')">
-        <div class="day-num">5</div>
-        <div class="day-info">
-          <div class="day-label">Sexta-feira · O Grande Fechamento</div>
-          <div class="day-title">Florianópolis — Dia do Mar</div>
-          <div class="day-subtitle">Ilha do Campeche · Lagoinha do Leste (trilha) · Última noite em Floripa</div>
-        </div>
-        <div class="day-meta">
-          <div class="day-budget-pill">~R$ 215/pessoa</div>
-          <div class="day-label" style="font-size:10px;">40 km internos · R$ 5/pax</div>
-        </div>
-        <div class="chevron">▼</div>
-      </div>
-      <div class="day-body" id="day5-body">
-        <div class="day-body-inner">
-
-          <div class="day-section">
-            <div class="day-section-title">🏝️ Opção A — Ilha do Campeche (reserve com semanas de antecedência)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🐠</div>
-                <div>
-                  <div class="activity-name">Ilha do Campeche — "Caribe Brasileiro"</div>
-                  <div class="activity-desc">IPHAN limita o número diário de visitantes — sensação real de paraíso privado. Maior concentração de inscrições rupestres do litoral sul. Água cristalina com visibilidade de 10 metros. <strong>Embarque em botes rápidos da Armação do Pântano do Sul ou Barra da Lagoa. Reservar com operadoras credenciadas com 2–4 semanas de antecedência no verão.</strong></div>
-                </div>
-                <div class="activity-cost">~R$ 90</div>
-              </div>
-            </div>
-            <div class="warn-box" style="margin-top:8px;">
-              <span>⚠️</span>
-              <span><strong>Atenção:</strong> A Ilha do Campeche só tem 1 restaurante caro e com fila. Levem cooler com água, frutas e lanches. Economiza dinheiro e tempo.</span>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🥾 Opção B — Lagoinha do Leste (se Campeche não rolar)</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">⛰️</div>
-                <div>
-                  <div class="activity-name">Lagoinha do Leste — Trilha pelo Pântano do Sul</div>
-                  <div class="activity-desc">Acessível apenas por trilha íngreme (~45 min subida). Recompensa: lagoa de água doce escura separada por uma faixa de areia do oceano aberto. Morro da Coroa no topo = o mirante mais dramático de Floripa. Completamente gratuito e praticamente deserto fora do pico da temporada.</div>
-                </div>
-                <div class="activity-cost free">grátis</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🍽️ Almoço / Tarde</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🥗</div>
-                <div>
-                  <div class="activity-name">Picnic / Cooler na ilha ou trilha</div>
-                  <div class="activity-desc">Comprar no supermercado antes: frutas, pão, frios, suco. Além de ser muito mais barato, evita fila e preserva tempo de praia. Leve snorkel — a experiência de mergulho no Campeche é gratuita após o barco.</div>
-                </div>
-                <div class="activity-cost">~R$ 20</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">🌃 Última noite — Jantar em Floripa</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🦐</div>
-                <div>
-                  <div class="activity-name">Ribeirão da Ilha — Ostras e Mariscos</div>
-                  <div class="activity-desc">Vilarejo pesqueiro no sul da ilha. Um dos mais completos restaurantes de frutos do mar de SC. Custo menor que os lounges do norte. Ideal para um jantar tranquilo de encerramento de viagem.</div>
-                </div>
-                <div class="activity-cost">~R$ 55</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💰 Orçamento do dia</div>
-            <div class="day-budget-table">
-              <div class="dbt-row"><span class="dbt-label">Gasolina (40 km internos)</span><span class="dbt-value">R$ 5</span></div>
-              <div class="dbt-row"><span class="dbt-label">Ilha do Campeche (barco)</span><span class="dbt-value">R$ 90</span></div>
-              <div class="dbt-row"><span class="dbt-label">Picnic / alimentação do dia</span><span class="dbt-value">R$ 20</span></div>
-              <div class="dbt-row"><span class="dbt-label">Jantar Ribeirão da Ilha</span><span class="dbt-value">R$ 55</span></div>
-              <div class="dbt-row"><span class="dbt-label">Hospedagem (2ª noite Floripa)</span><span class="dbt-value">R$ 65</span></div>
-              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA (com Campeche)</span><span class="dbt-value total-v">≈ R$ 235</span></div>
-              <div class="dbt-row"><span class="dbt-label">TOTAL / PESSOA (trilha Lagoinha — sem barco)</span><span class="dbt-value" style="color:#5abf8a;">≈ R$ 145</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div><!-- /day5 -->
-
-    <!-- ─── DIA 6 — SÁBADO ─── -->
-    <div class="day-card" id="day6">
-      <div class="day-header" onclick="toggle('day6')">
-        <div class="day-num">6</div>
-        <div class="day-info">
-          <div class="day-label">Sábado · Operação Retorno</div>
-          <div class="day-title">Florianópolis → Jaraguá do Sul</div>
-          <div class="day-subtitle">⚠️ Sair ANTES das 06h00 · BR-101 colapsa após 09h em alta temporada</div>
-        </div>
-        <div class="day-meta">
-          <div class="day-budget-pill free">~R$ 55/pessoa</div>
-          <div class="day-label" style="font-size:10px;">181 km · R$ 22/pax</div>
-        </div>
-        <div class="chevron">▼</div>
-      </div>
-      <div class="day-body" id="day6-body">
-        <div class="day-body-inner">
-
-          <div class="day-section">
-            <div class="warn-box">
-              <span>🚨</span>
-              <div>
-                <strong style="color:#e08070;">BR-101 em alta temporada = até 75% mais tráfego</strong><br>
-                <span>O trecho Floripa–BC–Itapema–Jaraguá leva 2h20 normalmente. Em sábado de verão das 9h às 18h, pode chegar a 7–10h de viagem parada. A Operação Verão da PRF reporta gargalos fatais em Itapema (Meia Praia), Camboriú e Itajaí.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">⏰ Plano de saída obrigatório</div>
-            <div class="activity-list">
-              <div class="activity">
-                <div class="activity-icon">🌙</div>
-                <div>
-                  <div class="activity-name">Checkout antes das 05h30 — na BR-101 antes das 06h00</div>
-                  <div class="activity-desc">Com estradas vazias e neblina costeira, você chega em Jaraguá do Sul por volta das 08h–08h30. Sobra manhã inteira para banho, bagagem e confraternização final antes de eles irem ao aeroporto/rodoviária.</div>
-                </div>
-                <div class="activity-cost free">2h20</div>
-              </div>
-              <div class="activity">
-                <div class="activity-icon">☕</div>
-                <div>
-                  <div class="activity-name">Última confraternização em Jaraguá do Sul</div>
-                  <div class="activity-desc">Com a chegada cedo, dá pra fazer um último brunch calmo — Quiero Café ou padaria simples. O encerramento da viagem sem correria e sem stress de trânsito.</div>
-                </div>
-                <div class="activity-cost">~R$ 25</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="day-section">
-            <div class="day-section-title">💰 Orçamento do dia</div>
-            <div class="day-budget-table">
-              <div class="dbt-row"><span class="dbt-label">Gasolina (181 km)</span><span class="dbt-value">R$ 22</span></div>
-              <div class="dbt-row"><span class="dbt-label">Café da manhã / brunch final</span><span class="dbt-value">R$ 25</span></div>
-              <div class="dbt-row total"><span class="dbt-label">TOTAL / PESSOA</span><span class="dbt-value total-v" style="color:#5abf8a;">≈ R$ 47</span></div>
-            </div>
-            <div class="tip-box">
-              <span class="tip-icon">⚡</span>
-              <span>Alternativa para quem não quer acordar às 5h: sair na quinta à noite de Floripa após o jantar (já sem hospedagem na sexta) e dormir em Jaraguá. Mas perde a Ilha do Campeche na sexta. Não compensa.</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div><!-- /day6 -->
-
-  </div><!-- /days-container -->
-
-  <!-- ─── TOTALIZADOR FINAL ─── -->
-  <div style="margin-top:40px;">
-    <div class="section-title">Fechamento — Total da viagem por pessoa</div>
-    <div class="day-budget-table" style="border-radius:14px;">
-      <div class="dbt-row"><span class="dbt-label">Dom — Jaraguá + Pomerode</span><span class="dbt-value">R$ 209</span></div>
-      <div class="dbt-row"><span class="dbt-label">Seg — São Francisco do Sul (com Pier 65)</span><span class="dbt-value">R$ 256</span></div>
-      <div class="dbt-row"><span class="dbt-label">Ter — Praia Brava + Balneário + Uvva</span><span class="dbt-value">R$ 296</span></div>
-      <div class="dbt-row"><span class="dbt-label">Qua — BC + Itapema + Rooftop</span><span class="dbt-value">R$ 200</span></div>
-      <div class="dbt-row"><span class="dbt-label">Qui — Floripa histórico + Seu Antônio</span><span class="dbt-value">R$ 245</span></div>
-      <div class="dbt-row"><span class="dbt-label">Sex — Ilha do Campeche + jantar</span><span class="dbt-value">R$ 235</span></div>
-      <div class="dbt-row"><span class="dbt-label">Sáb — Retorno</span><span class="dbt-value">R$ 47</span></div>
-      <div class="dbt-row total" style="background:rgba(201,146,42,.1);">
-        <span class="dbt-label" style="color:var(--sand);">TOTAL — Versão completa (todos os extras)</span>
-        <span class="dbt-value total-v" style="font-size:18px;">R$ 1.488</span>
-      </div>
-      <div class="dbt-row total" style="background:rgba(29,122,79,.08);">
-        <span class="dbt-label" style="color:#a0d8b0;">TOTAL — Versão econômica (cortes estratégicos)</span>
-        <span class="dbt-value total-v" style="color:#5abf8a; font-size:18px;">R$ 1.190</span>
+      <div class="trust-row">
+        <span class="chip"><span class="dot"></span>Conforme LGPD &amp; CFM 2.454/26</span>
+        <span class="chip"><span class="dot"></span>WhatsApp oficial</span>
+        <span class="chip"><span class="dot"></span>Prescrição digital</span>
+        <span class="chip"><span class="dot"></span>Teleconsulta FullHD</span>
       </div>
     </div>
 
-    <div class="tip-box" style="margin-top:16px; background:rgba(201,146,42,.06); border-color:rgba(201,146,42,.2);">
-      <span class="tip-icon">🏆</span>
-      <div style="font-size:13px; color:var(--sand2);">
-        <strong style="color:var(--gold2);">Cortes estratégicos para caber em R$ 1.200:</strong><br>
-        Pular Pier 65 (−R$ 70) · Trocar Seu Antônio por frutos do mar simples (−R$ 65) · Café da manhã feito no Airbnb todos os dias (−R$ 90) · Pular Hike Beach Club (−R$ 25) = <strong>−R$ 250 → chega em ~R$ 1.240.</strong>
-        Com R$ 1.400, você curte tudo sem sacrificar nada importante.
+    <div class="hero-visual reveal">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="chat-top">
+            <div class="av">B</div>
+            <div>
+              <div class="who">Bia · sua clínica</div>
+              <div class="stat">online · responde em segundos</div>
+            </div>
+          </div>
+          <div class="chat-body">
+            <div class="bub in">Oi, vocês atendem amanhã?<span class="t">22:47</span></div>
+            <div class="bub out">Olá! Atendemos sim. Tenho horário às 9h, 11h30 e 14h. Qual fica melhor pra você?<span class="t">22:47</span></div>
+            <div class="speed-tag"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4.09 12.97a.5.5 0 00.38.82H11l-1 8.21 8.91-10.97a.5.5 0 00-.38-.82H12l1-7.42z"/></svg>respondido em 3 segundos</div>
+            <div class="bub in">Pode ser 9h<span class="t">22:48</span></div>
+            <div class="bub out">Perfeito! Reservei seu horário. Te envio o Pix do sinal e a confirmação por aqui.<span class="t">22:48</span></div>
+          </div>
+        </div>
+        <div class="float-card fc-1">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><div class="lbl">Agendamento</div><div class="val">Confirmado</div></div>
+        </div>
+        <div class="float-card fc-2">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><div class="lbl">Pix do sinal</div><div class="val">Enviado</div></div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-</div><!-- /section -->
+<!-- ===== INTRO / DEFINIÇÃO ===== -->
+<section class="intro" id="bia">
+  <div class="wrap">
+    <div class="intro-card reveal">
+      <div class="left">
+        <span class="eyebrow">Quem é a Bia</span>
+        <h2>Não é um chatbot.<br>É o sistema operacional da sua clínica.</h2>
+        <p>A Bia atende todo paciente em linguagem natural, agenda, cobra, confirma, organiza o prontuário e emite a nota fiscal. Ela aprende com cada conversa, não exige configuração e não dorme. Você apenas conduz a clínica — a Bia cuida do resto.</p>
+      </div>
+      <div class="right">
+        <div class="formula">
+          <div class="row"><span class="op">+</span><span class="txt"><b>Atende e agenda 24h no WhatsApp</b>captura cada paciente, inclusive os de madrugada</span></div>
+          <div class="row"><span class="op">+</span><span class="txt"><b>Conduz prontuário, cobrança e gestão</b>tudo integrado, em paralelo ao atendimento</span></div>
+          <div class="row"><span class="op">=</span><span class="txt"><b>Mais receita, menos no-show, recepção leve</b>uma clínica que cresce sem o caos crescer junto</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ===== DARK LOSS SECTION ===== -->
+<section class="loss" id="resultados">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Antes de qualquer coisa</span>
+      <h2>Quanto sua clínica perde<br>enquanto você dorme?</h2>
+    </div>
+    <div class="scene reveal">
+      <div class="time">22h47</div>
+      <div class="q">"Oi, vocês atendem amanhã?"</div>
+      <p>Sem a Bia, ninguém responde até as 9h do dia seguinte. Em 11 horas o paciente já procurou outra clínica — e você nunca soube que ele existiu.</p>
+    </div>
+    <div class="loss-stats">
+      <div class="loss-stat reveal"><div class="n">33%</div><div class="l">dos agendamentos acontecem fora do horário comercial</div><div class="src">Doctoralia, 2025</div></div>
+      <div class="loss-stat reveal"><div class="n">47 min</div><div class="l">é o tempo médio de resposta de uma clínica no WhatsApp</div><div class="src">Mercado BR</div></div>
+      <div class="loss-stat reveal"><div class="n">25–35%</div><div class="l">é a taxa de no-show típica de clínicas no Brasil</div><div class="src">Panorama de Clínicas 2025</div></div>
+      <div class="loss-stat reveal"><div class="n">147M</div><div class="l">de brasileiros usam o WhatsApp todos os dias</div><div class="src">Statista, 2025</div></div>
+    </div>
+    <div class="vs-line reveal">
+      <div class="vs-item"><span class="lab">Resposta da clínica média</span><span class="big">47 min</span></div>
+      <span class="arrow">→</span>
+      <div class="vs-item now"><span class="lab">Resposta da Bia</span><span class="big">3 segundos</span></div>
+      <div style="flex:1"></div>
+      <div class="vs-item" style="max-width:280px"><span class="mt" style="color:#aebcdb;font-size:.95rem">A janela é agora. Quem entra primeiro paga menos e ganha mais.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 3 ATOS ===== -->
+<section class="atos" id="atos">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" style="justify-content:center">Como a Bia funciona</span>
+      <h2>Três atos. Uma clínica inteira.</h2>
+      <p>Da primeira mensagem do paciente à nota fiscal emitida — a Bia conduz toda a operação, sem você precisar pedir.</p>
+    </div>
+    <div class="atos-grid">
+      <div class="ato reveal">
+        <span class="tag">ATO I · RECEPÇÃO</span>
+        <h3>A porta que nunca fecha</h3>
+        <p>Tudo orquestrado pelo WhatsApp, o canal-mãe da sua clínica.</p>
+        <ul>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Atendimento 24h que não parece robô</b><span>Conduz a conversa em linguagem natural, no tom da clínica.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Funil inteligente de leads</b><span>Novo lead → agendado → pago → confirmado, sozinho.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Concierge por voz ou texto</b><span>"Bloqueia minha quinta de manhã." Comandos diretos.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Vigia 24/7 de urgências</b><span>Detecta sintomas críticos e escala para um humano.</span></span></li>
+        </ul>
+      </div>
+      <div class="ato reveal">
+        <span class="tag">ATO II · CONDUTA</span>
+        <h3>A consulta corre. A Bia escuta.</h3>
+        <p>Sua atenção fica 100% no paciente. O resto acontece em paralelo.</p>
+        <ul>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Escuta clínica em tempo real</b><span>Áudio transcrito ao vivo. A evolução já nasce escrita.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Prontuário inteligente</b><span>CID-10, linha do tempo e prescrição digital integrados.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Teleconsulta FullHD</b><span>Vídeo nativo, gravação e transcrição. Link em 1 clique.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Arquétipos por especialidade</b><span>Estética, odonto e multi já vêm prontos pra sua área.</span></span></li>
+        </ul>
+      </div>
+      <div class="ato reveal">
+        <span class="tag">ATO III · GESTÃO</span>
+        <h3>O back-office invisível</h3>
+        <p>Documentos, cobranças e nota fiscal acontecem sem você pedir.</p>
+        <ul>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>NFSe automática</b><span>Consulta finalizada → nota emitida → paciente avisado.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Documentos com assinatura digital</b><span>Atestados e termos assinados no celular do paciente.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Reativação de pacientes</b><span>Receita dormente (60, 90, 180 dias) volta a girar.</span></span></li>
+          <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Gerente dedicado humano</b><span>Um especialista monta os fluxos e mantém tudo rodando.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIFERENCIAIS ===== -->
+<section class="tech" id="tech">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Por que a Bia é diferente</span>
+      <h2>Inteligência de verdade, do primeiro contato à nota fiscal.</h2>
+      <p>Não é um chatbot de respostas prontas. A Bia entende contexto, conduz a conversa e opera a clínica inteira — com segurança e sem caixa-preta.</p>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal"><div class="k">Conversa natural</div><div class="v">Entende contexto</div><div class="d">Compreende o que o paciente quer e responde no tom da clínica, sem soar robô.</div></div>
+      <div class="tech-card reveal"><div class="k">Sempre ativa</div><div class="v">Atendimento 24/7</div><div class="d">Responde em segundos a qualquer hora, no WhatsApp oficial da sua clínica.</div></div>
+      <div class="tech-card reveal"><div class="k">Consulta remota</div><div class="v">Teleconsulta em HD</div><div class="d">Vídeo de alta definição com prontuário ao lado e gravação automática.</div></div>
+      <div class="tech-card reveal"><div class="k">Receita &amp; documentos</div><div class="v">Tudo digital</div><div class="d">Prescrição e documentos assinados digitalmente e enviados ao paciente.</div></div>
+      <div class="tech-card reveal"><div class="k">Financeiro</div><div class="v">Pix &amp; nota fiscal</div><div class="d">Cobrança via Pix e emissão de NFSe acontecem dentro do próprio atendimento.</div></div>
+      <div class="tech-card reveal"><div class="k">Segurança</div><div class="v">LGPD &amp; CFM</div><div class="d">Dados criptografados ponta a ponta, em conformidade com a LGPD e o CFM.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STEPS ===== -->
+<section class="steps">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" style="justify-content:center">Implementação</span>
+      <h2>Menos de 1 hora. 3 dias em modo teste.</h2>
+      <p>A maior fricção da venda de software médico — eliminada por design.</p>
+    </div>
+    <div class="steps-wrap">
+      <div class="step reveal"><div class="num">1</div><h4>Conexão</h4><p>WhatsApp Business via QR Code. Cinco minutos.</p></div>
+      <div class="step reveal"><div class="num">2</div><h4>Configuração</h4><p>Profissionais, horários e serviços. Cuidamos disso por você.</p></div>
+      <div class="step reveal"><div class="num">3</div><h4>Arquétipo</h4><p>Funil, scripts e gatilhos da sua especialidade aplicados.</p></div>
+      <div class="step reveal"><div class="num">4</div><h4>Modo teste</h4><p>3 dias com a Bia atendendo só sua equipe. Sem risco.</p></div>
+      <div class="step reveal"><div class="num">5</div><h4>Ativação</h4><p>Liberação para pacientes e refinamento contínuo.</p></div>
+    </div>
+    <p class="steps-note reveal">Um <b>gerente Klivy dedicado</b> conduz toda a implementação e mantém os fluxos rodando — todo mês.</p>
+  </div>
+</section>
+
+<!-- ===== COMPARATIVO ===== -->
+<section class="compare">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">O comparativo honesto</span>
+      <h2>Por que a Bia, e não as alternativas.</h2>
+    </div>
+    <span class="table-hint">arraste para o lado para ver tudo →</span>
+    <div class="table-scroll reveal">
+      <table>
+        <thead>
+          <tr><th>Capacidade</th><th>Recepção CLT</th><th>Chatbot tradicional</th><th>Software de gestão</th><th class="bia">Bia</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Atendimento 24h</td><td class="no">—</td><td>Limitado</td><td class="no">—</td><td class="bia">Sim</td></tr>
+          <tr><td>Entende contexto e fala como a clínica</td><td>Sim</td><td>Fluxos fixos</td><td class="no">—</td><td class="bia">IA que entende contexto</td></tr>
+          <tr><td>Cobra Pix dentro do chat</td><td>Manual</td><td class="no">—</td><td>Externo</td><td class="bia">Nativo</td></tr>
+          <tr><td>Prontuário + agenda integrados</td><td class="no">—</td><td class="no">—</td><td>Sim, isolado</td><td class="bia">Sim, conversam</td></tr>
+          <tr><td>NFSe automática</td><td>Manual</td><td class="no">—</td><td>Parcial</td><td class="bia">Automática</td></tr>
+          <tr><td>Triagem de urgência</td><td>Depende</td><td class="no">—</td><td class="no">—</td><td class="bia">Vigia 24/7</td></tr>
+          <tr><td>Implementação</td><td>Treinamento</td><td>Você configura</td><td>Semanas</td><td class="bia">&lt; 1 hora, com gerente</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-foot reveal">A Bia não é um upgrade. É a substituição da operação.</p>
+  </div>
+</section>
+
+<!-- ===== CASES ===== -->
+<section class="cases">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" style="justify-content:center">O que muda na prática</span>
+      <h2>O tipo de virada que a Bia entrega</h2>
+      <p>Exemplos representativos do impacto observado em clínicas que operam com inteligência de atendimento 24h.</p>
+    </div>
+    <div class="cases-grid">
+      <div class="case reveal">
+        <div class="who">Clínica odontológica</div>
+        <div class="sub">Vitória/ES · 3 dentistas</div>
+        <div class="metric"><span class="arrow-m">no-show ↓</span><span class="ml">queda expressiva nas faltas com confirmação automática</span></div>
+        <div class="metric"><span class="arrow-m">receita ↑</span><span class="ml">agenda mais cheia já no primeiro mês</span></div>
+        <div class="metric"><span class="arrow-m">recepção ↓ horas</span><span class="ml">menos tempo no telefone, mais foco no paciente</span></div>
+      </div>
+      <div class="case reveal">
+        <div class="who">Clínica de dermatologia</div>
+        <div class="sub">São Paulo/SP · 5 profissionais</div>
+        <div class="metric"><span class="arrow-m">47 min → 3 s</span><span class="ml">tempo de resposta ao paciente</span></div>
+        <div class="metric"><span class="arrow-m">+ agendamentos</span><span class="ml">leads de madrugada deixaram de escapar</span></div>
+        <div class="metric"><span class="arrow-m">conversão ↑</span><span class="ml">mais contatos viram consultas marcadas</span></div>
+      </div>
+      <div class="case reveal">
+        <div class="who">Rede com 2 unidades</div>
+        <div class="sub">Belo Horizonte/MG · 12 profissionais</div>
+        <div class="metric"><span class="arrow-m">custo ↓</span><span class="ml">operação de recepção mais enxuta por unidade</span></div>
+        <div class="metric"><span class="arrow-m">inadimplência ↓</span><span class="ml">cobrança e confirmação automatizadas</span></div>
+        <div class="metric"><span class="arrow-m">ocupação ↑</span><span class="ml">agenda mais cheia nas duas unidades</span></div>
+      </div>
+    </div>
+    <p class="cases-disc reveal">Cenários ilustrativos baseados em padrões de operação observados no setor. Resultados variam conforme a clínica, a especialidade e o volume de atendimento.</p>
+  </div>
+</section>
+
+<!-- ===== FORM / CTA ===== -->
+<section class="cta" id="form">
+  <div class="wrap cta-grid">
+    <div class="cta-left reveal">
+      <span class="eyebrow">Próximo passo</span>
+      <h2>Vamos ver a sua clínica rodando.</h2>
+      <p>30 minutos com a sua agenda real, seus números e seu fluxo. Sem compromisso.</p>
+      <div class="mini">
+        <div class="m"><span class="mn">1</span><span class="mt"><b>Aplicação</b>Você conta o básico da sua clínica e a sua dor nº 1.</span></div>
+        <div class="m"><span class="mn">2</span><span class="mt"><b>Demonstração ao vivo</b>Mostramos a Bia rodando num caso parecido com o seu.</span></div>
+        <div class="m"><span class="mn">3</span><span class="mt"><b>Piloto guiado</b>Gerente dedicado configura tudo. 3 dias de teste antes de qualquer paciente.</span></div>
+      </div>
+    </div>
+    <div class="form-card reveal">
+      <h3>Fale com nosso consultor</h3>
+      <p class="fsub">Preencha em 1 minuto. Ao enviar, você fala direto com nosso time no WhatsApp.</p>
+      <form id="leadForm" novalidate>
+        <div class="field">
+          <label for="nome">Seu nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Como podemos te chamar?">
+        </div>
+        <div class="field">
+          <label for="clinica">Nome da clínica</label>
+          <input type="text" id="clinica" name="clinica" placeholder="Nome da sua clínica">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="whats">WhatsApp</label>
+            <input type="tel" id="whats" name="whats" placeholder="(00) 00000-0000">
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="voce@clinica.com">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="esp">Especialidade</label>
+            <select id="esp" name="esp">
+              <option value="" selected disabled>Selecione</option>
+              <option>Odontologia</option>
+              <option>Estética / Dermatologia</option>
+              <option>Médica / Multiespecialidade</option>
+              <option>Outra</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="dor">Maior dor hoje</label>
+            <select id="dor" name="dor">
+              <option value="" selected disabled>Selecione</option>
+              <option>No-show / faltas</option>
+              <option>Demora pra responder paciente</option>
+              <option>Recepção sobrecarregada</option>
+              <option>Agenda com horários ociosos</option>
+              <option>Gestão / NFSe / cobrança</option>
+            </select>
+          </div>
+        </div>
+        <div class="err" id="formErr">Preencha pelo menos seu nome e WhatsApp para continuar.</div>
+        <button type="submit" class="btn btn-primary">Falar com consultor no WhatsApp
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-3-.3-.5.3-.4.8-1.4.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6 1.9.8 2.7.9 3.6.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2z"/></svg>
+        </button>
+        <p class="legal">Ao enviar, você concorda em ser contatado pelo time da Klivy. Seus dados são tratados conforme a LGPD.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" style="justify-content:center">Perguntas frequentes</span>
+      <h2>Tudo que você quer saber sobre a Bia</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal"><button class="faq-q">Eu já uso outro sistema. Dá pra migrar?<span class="ic">+</span></button><div class="faq-a"><p>Sim. Nossa equipe cuida da migração para você: clientes, histórico e agenda. Você não perde nada e ganha a Bia integrada desde o primeiro dia. A transição é guiada por um gerente dedicado.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q">Quanto custa a Bia?<span class="ic">+</span></button><div class="faq-a"><p>O plano é sob consulta. Montamos a proposta de acordo com o tamanho e a operação da sua clínica — a cobrança é por clínica, com usuários ilimitados, sem cobrar por profissional. Fale com nosso consultor para ver o que faz sentido pro seu caso.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q">É difícil de usar?<span class="ic">+</span></button><div class="faq-a"><p>Você conversa com a Bia em português, dentro do WhatsApp e do painel. A implementação leva menos de 1 hora e um gerente dedicado configura tudo. Não há sistema novo pra decorar.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q">A Bia vai substituir minha equipe?<span class="ic">+</span></button><div class="faq-a"><p>Não. A Bia potencializa sua equipe: cuida da parte repetitiva (responder, agendar, cobrar, lembrar) para que as pessoas foquem em atender bem e fazer a clínica crescer.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q">Meus dados ficam seguros?<span class="ic">+</span></button><div class="faq-a"><p>Sim. Dados criptografados ponta a ponta, em conformidade com a LGPD e com a resolução CFM 2.454/26. A Bia opera com guardrails clínicos ativos e a arquitetura pode ser auditada.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q">Funciona pra qual tipo de clínica?<span class="ic">+</span></button><div class="faq-a"><p>Odontologia, estética/dermatologia e clínicas médicas ou multiespecialidade. A Bia já vem com funil, scripts e gatilhos prontos por especialidade, com customização opcional.</p></div></div>
+    </div>
+    <p style="text-align:center;margin-top:34px;color:#566784">Não encontrou sua resposta? <a href="https://wa.me/5547984226825?text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Bia." target="_blank" rel="noopener" style="color:var(--azul);font-weight:600">Chame no WhatsApp →</a></p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
 <footer>
-  Roteiro SC · 4 amigos · Gol 1.6 · 624 km · Verão · Feito com carinho para vocês curtirem demais
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand"><svg class="ico" viewBox="0 0 1395 1552"><use href="#klivy-icon"/></svg>Klivy</a>
+        <p>Inteligência silenciosa, da recepção à gestão. A Bia é o produto de IA da Klivy para clínicas de saúde, odontologia e estética.</p>
+      </div>
+      <div class="foot-cta">
+        <h4>Pronto pra conhecer a Bia?</h4>
+        <a href="https://wa.me/5547984226825?text=Ol%C3%A1!%20Quero%20falar%20com%20um%20consultor%20sobre%20a%20Bia." target="_blank" rel="noopener" class="btn btn-primary">Falar com consultor</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Klivy. Todos os direitos reservados.</span>
+      <span>Conforme LGPD &amp; CFM 2.454/26</span>
+    </div>
+  </div>
 </footer>
 
 <script>
-function toggle(id) {
-  const card = document.getElementById(id);
-  const body = document.getElementById(id + '-body');
-  const isOpen = card.classList.contains('open');
-  
-  // Close all
-  document.querySelectorAll('.day-card').forEach(c => c.classList.remove('open'));
-  document.querySelectorAll('.day-body').forEach(b => b.style.maxHeight = '0');
-  
-  // Open clicked if it was closed
-  if (!isOpen) {
-    card.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
-    // Re-measure after content is visible for nested elements
-    setTimeout(() => {
-      body.style.maxHeight = body.scrollHeight + 400 + 'px';
-    }, 50);
-  }
-}
+  // mobile menu
+  var burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+  burger.addEventListener('click',function(){mm.classList.toggle('open');});
+  mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mm.classList.remove('open');});});
 
-// Open day 0 by default
-window.addEventListener('DOMContentLoaded', () => {
-  toggle('day0');
-});
+  // faq accordion
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var item=q.parentElement, a=q.nextElementSibling, open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null;});
+      if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+    });
+  });
+
+  // scroll reveal
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // form -> whatsapp
+  var WA='5547984226825';
+  document.getElementById('leadForm').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var nome=document.getElementById('nome').value.trim();
+    var clinica=document.getElementById('clinica').value.trim();
+    var whats=document.getElementById('whats').value.trim();
+    var email=document.getElementById('email').value.trim();
+    var esp=document.getElementById('esp').value;
+    var dor=document.getElementById('dor').value;
+    var err=document.getElementById('formErr');
+    if(!nome||!whats){err.style.display='block';return;}
+    err.style.display='none';
+    var msg='Olá! Quero conhecer a Bia. 👋\n\n';
+    msg+='*Nome:* '+nome+'\n';
+    if(clinica) msg+='*Clínica:* '+clinica+'\n';
+    msg+='*WhatsApp:* '+whats+'\n';
+    if(email) msg+='*E-mail:* '+email+'\n';
+    if(esp) msg+='*Especialidade:* '+esp+'\n';
+    if(dor) msg+='*Maior dor hoje:* '+dor+'\n';
+    var url='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+    window.open(url,'_blank');
+  });
 </script>
-
 </body>
 </html>
